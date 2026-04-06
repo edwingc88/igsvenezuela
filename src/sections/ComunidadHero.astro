@@ -1,0 +1,336 @@
+<!-- Modal Formulario -->
+<div id="uploadModal" class="modal-overlay fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-2xl rounded-[32px] shadow-2xl relative">
+        <button id="btn-cerrar-modal" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-orange-900 transition text-xl font-bold">
+            &times;
+        </button>
+        <div class="p-8 md:p-10">
+            <h2 class="text-2xl font-bold text-orange-900 mb-2">Compartir Galería</h2>
+            <p class="text-sm text-gray-500 mb-8">Sube tus fotos para que toda la congregación pueda verlas.</p>
+            <form id="churchForm" class="space-y-5">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <input type="text" id="nombre" placeholder="Tu nombre" class="w-full p-4 bg-gray-50 rounded-2xl outline-none border border-transparent focus:border-orange-500" required>
+                    <select id="categoria" class="w-full p-4 bg-gray-50 rounded-2xl outline-none border border-transparent focus:border-orange-500">
+                        <option>Cultos Dominicales</option>
+                        <option>Obra Social</option>
+                        <option>Ministerio Juvenil</option>
+                    </select>
+                </div>
+                <input type="text" id="titulo" placeholder="Título de la Galería" class="w-full p-4 bg-gray-50 rounded-2xl outline-none border border-transparent focus:border-orange-500" required>
+                <div id="drop-area" class="drop-zone flex flex-col items-center justify-center cursor-pointer hover:bg-orange-50 transition">
+                    <input type="file" id="foto" class="hidden" multiple accept="image/*">
+                    <div id="modal-preview-info" class="text-center py-6">
+                        <p class="text-xs font-bold text-gray-400 uppercase">Seleccionar Imágenes</p>
+                    </div>
+                    <div id="modal-preview-grid" class="flex flex-wrap gap-2 p-4"></div>
+                </div>
+                <button type="submit" class="w-full btn-church py-4 rounded-2xl font-bold text-lg shadow-xl">
+                    Publicar en el Muro
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- PÁGINA: COMUNIDAD -->
+<main id="page-comunidad" class="page-content py-20 px-6">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-orange-900 italic">Muro de Comunidad</h2>
+            <p class="text-gray-500 mt-2 pb-4">Momentos capturados por nuestra familia.</p>
+            <a href="#" id="btn-subir-fotos" class="btn-church px-6 py-2 rounded-full shadow-lg hover:bg-orange-600 hover:translate-y-0.5 transition cursor-pointer">
+                Subir Fotos
+            </a>
+        </div>
+
+        <!-- Galería renderizada por JS -->
+        <div id="posts-container" class="space-y-16"></div>
+
+        <!-- Paginación -->
+        <div class="mt-20 flex justify-center items-center space-x-3">
+            <button class="w-12 h-12 rounded-2xl border border-orange-100 flex items-center justify-center text-orange-900 hover:bg-orange-50 transition">&#8249;</button>
+            <button class="w-12 h-12 rounded-2xl bg-orange-800 text-white font-bold">1</button>
+            <button class="w-12 h-12 rounded-2xl border border-orange-100 flex items-center justify-center text-orange-900 hover:bg-orange-50 transition font-bold">2</button>
+            <button class="w-12 h-12 rounded-2xl border border-orange-100 flex items-center justify-center text-orange-900 hover:bg-orange-50 transition">&#8250;</button>
+        </div>
+    </div>
+</main>
+
+
+<style is:global>
+    .gallery-content { width: 100%; }
+
+    .internal-bento {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 110px;
+        gap: 6px;
+        width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    .internal-bento img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 6px;
+        transition: transform 0.3s;
+        display: block;
+    }
+    .internal-bento img:hover { transform: scale(1.03); }
+
+    .view-slider { width: 100%; display: block; }
+    .swiper { width: 100% !important; height: 420px; border-radius: 16px; overflow: hidden; }
+    .swiper-wrapper { width: 100% !important; }
+    .swiper-slide { width: 100% !important; height: 100%; }
+    .swiper-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .modal-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+    .drop-zone { border: 2px dashed #d1d5db; min-height: 150px; border-radius: 15px; }
+    .preview-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+</style>
+
+
+<script>
+import Swiper from 'swiper';
+import { Navigation, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+interface Galeria {
+    id: number;
+    autor: string;
+    categoria: string;
+    categoriaColor: string;
+    titulo: string;
+    fecha: string;
+    imagenes: string[];
+}
+
+const galerias: Galeria[] = [
+    {
+        id: 1,
+        autor: 'Familia Rodriguez',
+        categoria: 'Obra Social',
+        categoriaColor: 'text-orange-600 bg-orange-50',
+        titulo: 'Jornada de Alimentos en Petare',
+        fecha: 'Hace 2 días',
+        imagenes: [
+            'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80&w=800',
+        ]
+    },
+    {
+        id: 2,
+        autor: 'Hno. Gabriel M.',
+        categoria: 'Cultos Dominicales',
+        categoriaColor: 'text-blue-600 bg-blue-50',
+        titulo: 'Domingo de Resurrección',
+        fecha: 'Hace 1 semana',
+        imagenes: [
+            'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1478147427282-58a87a433b2a?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1519491050282-cf00c82424b4?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800',
+        ]
+    },
+    {
+        id: 3,
+        autor: 'Ministerio Juvenil IGS',
+        categoria: 'Ministerio Juvenil',
+        categoriaColor: 'text-green-600 bg-green-50',
+        titulo: 'Retiro Juvenil en los Andes',
+        fecha: 'Hace 3 días',
+        imagenes: [
+            'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&q=80&w=800',
+            'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=800',
+        ]
+    }
+];
+
+// Guarda instancias de Swiper para destruirlas al reinicializar
+const swiperInstances: Map<string, Swiper> = new Map();
+
+function renderGalerias() {
+    const container = document.querySelector<HTMLElement>('#posts-container');
+    if (!container) return;
+
+    container.innerHTML = galerias.map(g => `
+        <article class="bg-white p-8 rounded-[40px] shadow-xl border border-orange-50 relative" data-id="${g.id}">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                <div>
+                    <span class="text-[10px] font-bold ${g.categoriaColor} px-3 py-1 rounded-full uppercase tracking-widest">${g.categoria}</span>
+                    <h3 class="text-2xl font-bold text-orange-900 mt-2">${g.titulo}</h3>
+                    <p class="text-sm text-gray-400 mt-1">Publicado por <b>${g.autor}</b> • ${g.fecha}</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button class="btn-download text-xs font-bold px-4 py-2 rounded-xl border border-orange-200 text-orange-800 hover:bg-orange-50 transition cursor-pointer">
+                        ⬇ Descargar todo
+                    </button>
+                    <div class="flex bg-gray-100 p-1 rounded-xl">
+                        <button data-view="bento" class="btn-toggle px-4 py-2 rounded-lg text-xs font-bold transition bg-white shadow-sm text-orange-900 hover:bg-gray-200 cursor-pointer">Bento</button>
+                        <button data-view="slider" class="btn-toggle px-4 py-2 rounded-lg text-xs font-bold transition text-gray-500 hover:bg-gray-200 cursor-pointer">Slider</button>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-content">
+                <div class="view-bento internal-bento">
+                    ${g.imagenes.map((src, i) => `<img src="${src}" alt="foto ${i + 1}">`).join('')}
+                </div>
+                <div class="view-slider" style="display:none">
+                    <div class="swiper" id="swiper-${g.id}">
+                        <div class="swiper-wrapper">
+                            ${g.imagenes.map((src, i) => `<div class="swiper-slide"><img src="${src}" alt="foto ${i + 1}"></div>`).join('')}
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    `).join('');
+
+    bindToggleEvents();
+    bindDownloadEvents();
+}
+
+function initSwiper(id: number) {
+    const key = `swiper-${id}`;
+    // Destruir instancia previa si existe
+    if (swiperInstances.has(key)) {
+        swiperInstances.get(key)!.destroy(true, true);
+        swiperInstances.delete(key);
+    }
+    const instance = new Swiper(`#${key}`, {
+        modules: [Navigation, Autoplay],
+        loop: true,
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        autoplay: { delay: 3500 },
+    });
+    swiperInstances.set(key, instance);
+}
+
+function bindToggleEvents() {
+    document.querySelectorAll('.btn-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const viewType = btn.getAttribute('data-view');
+            const article = btn.closest('article');
+            const id = Number(article?.getAttribute('data-id'));
+            const toggleContainer = btn.closest('div');
+
+            toggleContainer?.querySelectorAll('.btn-toggle').forEach(b => {
+                b.classList.remove('bg-white', 'shadow-sm', 'text-orange-900');
+                b.classList.add('text-gray-500');
+            });
+            btn.classList.add('bg-white', 'shadow-sm', 'text-orange-900');
+            btn.classList.remove('text-gray-500');
+
+            const bentoView = article?.querySelector<HTMLElement>('.view-bento');
+            const sliderView = article?.querySelector<HTMLElement>('.view-slider');
+
+            if (viewType === 'bento') {
+                if (bentoView) bentoView.style.display = 'grid';
+                if (sliderView) sliderView.style.display = 'none';
+            } else {
+                if (bentoView) bentoView.style.display = 'none';
+                if (sliderView) sliderView.style.display = 'block';
+                initSwiper(id);
+            }
+        });
+    });
+}
+
+function bindDownloadEvents() {
+    document.querySelectorAll('.btn-download').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const article = btn.closest('article');
+            article?.querySelectorAll<HTMLImageElement>('.view-bento img').forEach((img, i) => {
+                const a = document.createElement('a');
+                a.href = img.src;
+                a.download = `foto-${i + 1}.jpg`;
+                a.target = '_blank';
+                a.click();
+            });
+        });
+    });
+}
+
+// --- MODAL ---
+const modal = document.querySelector<HTMLElement>('#uploadModal');
+
+const closeModal = () => {
+    modal?.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+};
+
+document.querySelector('#btn-subir-fotos')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    modal?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+});
+
+document.querySelector('#btn-cerrar-modal')?.addEventListener('click', closeModal);
+
+// --- PREVIEW MODAL ---
+const dropArea = document.querySelector<HTMLElement>('#drop-area');
+const fileInput = document.querySelector<HTMLInputElement>('#foto');
+const previewGrid = document.querySelector<HTMLElement>('#modal-preview-grid');
+const previewInfo = document.querySelector<HTMLElement>('#modal-preview-info');
+let selectedFiles: File[] = [];
+
+dropArea?.addEventListener('click', () => fileInput?.click());
+
+fileInput?.addEventListener('change', function() {
+    selectedFiles = Array.from(this.files ?? []);
+    if (!previewGrid) return;
+    previewGrid.innerHTML = '';
+    if (selectedFiles.length > 0) {
+        previewInfo?.classList.add('hidden');
+        selectedFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.createElement('img');
+                img.src = (e.target as FileReader).result as string;
+                img.className = 'preview-thumb';
+                img.alt = file.name;
+                previewGrid.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+});
+
+// --- SUBMIT ---
+document.querySelector<HTMLFormElement>('#churchForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (selectedFiles.length === 0) return alert('Selecciona fotos.');
+
+    const nombre = document.querySelector<HTMLInputElement>('#nombre')?.value ?? '';
+    const titulo = document.querySelector<HTMLInputElement>('#titulo')?.value ?? '';
+    const cat = document.querySelector<HTMLSelectElement>('#categoria')?.value ?? '';
+
+    galerias.unshift({
+        id: Date.now(),
+        autor: nombre,
+        categoria: cat,
+        categoriaColor: 'text-orange-600 bg-orange-50',
+        titulo,
+        fecha: 'Recién publicado',
+        imagenes: selectedFiles.map(f => URL.createObjectURL(f))
+    });
+
+    renderGalerias();
+    closeModal();
+});
+
+renderGalerias();
+</script>

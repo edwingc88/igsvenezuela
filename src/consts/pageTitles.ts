@@ -1,0 +1,1 @@
+export const fixedTitle: string = 'Encuentra acordes, letras y diagramas para guitarra y piano de tus canciones cristianas favoritas en un solo lugar.'

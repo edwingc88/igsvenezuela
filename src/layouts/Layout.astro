@@ -1,23 +1,98 @@
+---
+
+import Footer from "../sections/Footer.astro";
+import Header from "../sections/Header.astro";
+import "../styles/global.css";
+
+
+import { fixedTitle } from "@/consts/pageTitles";
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  robots?: string;
+}
+
+const {
+  title = fixedTitle,
+  description = "Evento de boxeo aficionado entre streamers y creadores de contenido, organizado por Ibai Llanos",
+  canonical,
+  robots,
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/onlylogo.png" />
+    <link rel="icon" href="/onlylogo.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Ibai Llanos" />
+    <meta
+      name="theme-color"
+      content="#0a1024"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#f8fafc"
+      media="(prefers-color-scheme: light)"
+    />
+
+    <meta name="description" content={description} />
+    <meta name="author" content="RIOTEC" />
+    <meta name="theme-color" content="#0a1024" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {robots && <meta name="robots" content={robots} />}
+
+    <meta property="og:url" content="https://www.tus-acordes-cristianos.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta
+      property="og:image"
+      content="https://www.tus-acordes-cristianos.com/og-image.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Tus Acordes Cristianos — Alabanza y Acción de Gracias"
+    />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Tus Acordes Cristianos" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@tusacordescristianos" />
+    <meta name="twitter:creator" content="@tu_usuario" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta
+      name="twitter:image"
+      content="https://www.tus-acordes-cristianos.com/og-image.jpg"
+    />
+  </head>
+  <body>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<!-- <style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
 </style>
+ -->

@@ -1,0 +1,125 @@
+ @import "tailwindcss";
+ 
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-principal: #8c4b1d;
+    --color-secundario: #d97706;
+    --color-fondo: #fdfaf6;
+    --color-texto: #3d2b1f;
+  }
+}
+
+@layer components {
+  .btn-church {
+    background-color: var(--color-principal);
+    color: white;
+    transition: all 0.3s ease;
+  }
+}
+
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            scroll-behavior: smooth;
+        }
+
+        .bg-church-gradient {
+            background: linear-gradient(135deg, #a65d26 0%, #633314 100%);
+        }
+
+                .btn-church {
+            background-color: var(--color-principal);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-church:hover {
+            background-color: var(--color-secundario);
+            transform: translateY(-2px);
+        }
+
+        /* Pinterest Masonry Layout */
+        .pinterest-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 640px) { .pinterest-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .pinterest-grid { column-count: 3; } }
+
+        .pinterest-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+
+
+        .filter-btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: 1px solid #e5e7eb;
+            background: white;
+            color: #4b5563;
+            transition: all 0.2s;
+        }
+        .filter-btn.active {
+            background-color: var(--color-secundario);
+            color: white;
+            border-color: var(--color-secundario);
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(140, 75, 29, 0.1), 0 8px 10px -6px rgba(140, 75, 29, 0.1);
+        }
+
+        /* Área de carga mejorada para múltiples fotos */
+        .drop-zone {
+            border: 2px dashed #d1d5db;
+            transition: all 0.3s ease;
+            min-height: 200px;
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 100%;
+            padding: 15px;
+        }
+
+        .preview-thumb {
+            aspect-ratio: 1;
+            object-cover: cover;
+            border-radius: 8px;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-link {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--color-secundario);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .pastor-section {
+            background: linear-gradient(rgba(253, 250, 246, 0.95), rgba(253, 250, 246, 0.95)), url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+        }
