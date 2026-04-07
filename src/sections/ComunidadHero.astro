@@ -1,6 +1,16 @@
+---
+
+const response = await fetch(new URL('/api/galerias', Astro.url));
+const galerias = await response.json();
+
+---
+
+<!-- Bridge servidor → cliente -->
+<script id="galeria-data" type="application/json" set:html={JSON.stringify(galerias)}></script>
+
 <!-- Modal Formulario -->
-<div id="uploadModal" class="modal-overlay fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-2xl rounded-[32px] shadow-2xl relative">
+<div id="uploadModal" class="modal-overlay fixed inset-0 z-60  hidden items-center justify-center p-4">
+    <div class="bg-white w-full max-w-2xl rounded-4xl shadow-2xl relative">
         <button id="btn-cerrar-modal" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-orange-900 transition text-xl font-bold">
             &times;
         </button>
@@ -85,83 +95,35 @@
     .swiper-slide { width: 100% !important; height: 100%; }
     .swiper-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .modal-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+    .modal-overlay {
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    display: none;  /* oculto por defecto */
+}
+.modal-overlay.active {
+    display: flex;  /* visible cuando tiene clase active */
+}
+
     .drop-zone { border: 2px dashed #d1d5db; min-height: 150px; border-radius: 15px; }
     .preview-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
 </style>
 
 
 <script>
+// @ts-nocheck
 import Swiper from 'swiper';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-interface Galeria {
-    id: number;
-    autor: string;
-    categoria: string;
-    categoriaColor: string;
-    titulo: string;
-    fecha: string;
-    imagenes: string[];
-}
+let galerias = JSON.parse(
+    document.getElementById('galeria-data').textContent
+);
 
-const galerias: Galeria[] = [
-    {
-        id: 1,
-        autor: 'Familia Rodriguez',
-        categoria: 'Obra Social',
-        categoriaColor: 'text-orange-600 bg-orange-50',
-        titulo: 'Jornada de Alimentos en Petare',
-        fecha: 'Hace 2 días',
-        imagenes: [
-            'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80&w=800',
-        ]
-    },
-    {
-        id: 2,
-        autor: 'Hno. Gabriel M.',
-        categoria: 'Cultos Dominicales',
-        categoriaColor: 'text-blue-600 bg-blue-50',
-        titulo: 'Domingo de Resurrección',
-        fecha: 'Hace 1 semana',
-        imagenes: [
-            'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1478147427282-58a87a433b2a?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1519491050282-cf00c82424b4?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800',
-        ]
-    },
-    {
-        id: 3,
-        autor: 'Ministerio Juvenil IGS',
-        categoria: 'Ministerio Juvenil',
-        categoriaColor: 'text-green-600 bg-green-50',
-        titulo: 'Retiro Juvenil en los Andes',
-        fecha: 'Hace 3 días',
-        imagenes: [
-            'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=800',
-        ]
-    }
-];
-
-// Guarda instancias de Swiper para destruirlas al reinicializar
-const swiperInstances: Map<string, Swiper> = new Map();
+const swiperInstances = new Map();
 
 function renderGalerias() {
-    const container = document.querySelector<HTMLElement>('#posts-container');
+    const container = document.querySelector('#posts-container');
     if (!container) return;
 
     container.innerHTML = galerias.map(g => `
@@ -203,11 +165,11 @@ function renderGalerias() {
     bindDownloadEvents();
 }
 
-function initSwiper(id: number) {
+function initSwiper(id) {
     const key = `swiper-${id}`;
     // Destruir instancia previa si existe
     if (swiperInstances.has(key)) {
-        swiperInstances.get(key)!.destroy(true, true);
+        swiperInstances.get(key).destroy(true, true);
         swiperInstances.delete(key);
     }
     const instance = new Swiper(`#${key}`, {
@@ -234,8 +196,8 @@ function bindToggleEvents() {
             btn.classList.add('bg-white', 'shadow-sm', 'text-orange-900');
             btn.classList.remove('text-gray-500');
 
-            const bentoView = article?.querySelector<HTMLElement>('.view-bento');
-            const sliderView = article?.querySelector<HTMLElement>('.view-slider');
+            const bentoView = article?.querySelector('.view-bento');
+            const sliderView = article?.querySelector('.view-slider');
 
             if (viewType === 'bento') {
                 if (bentoView) bentoView.style.display = 'grid';
@@ -253,7 +215,7 @@ function bindDownloadEvents() {
     document.querySelectorAll('.btn-download').forEach(btn => {
         btn.addEventListener('click', () => {
             const article = btn.closest('article');
-            article?.querySelectorAll<HTMLImageElement>('.view-bento img').forEach((img, i) => {
+            article?.querySelectorAll('.view-bento img').forEach((img, i) => {
                 const a = document.createElement('a');
                 a.href = img.src;
                 a.download = `foto-${i + 1}.jpg`;
@@ -265,27 +227,27 @@ function bindDownloadEvents() {
 }
 
 // --- MODAL ---
-const modal = document.querySelector<HTMLElement>('#uploadModal');
+const modal = document.querySelector('#uploadModal');
 
 const closeModal = () => {
-    modal?.classList.add('hidden');
+    modal?.classList.remove('active');
     document.body.style.overflow = 'auto';
 };
 
 document.querySelector('#btn-subir-fotos')?.addEventListener('click', (e) => {
     e.preventDefault();
-    modal?.classList.remove('hidden');
+    modal?.classList.add('active');
     document.body.style.overflow = 'hidden';
 });
 
 document.querySelector('#btn-cerrar-modal')?.addEventListener('click', closeModal);
 
 // --- PREVIEW MODAL ---
-const dropArea = document.querySelector<HTMLElement>('#drop-area');
-const fileInput = document.querySelector<HTMLInputElement>('#foto');
-const previewGrid = document.querySelector<HTMLElement>('#modal-preview-grid');
-const previewInfo = document.querySelector<HTMLElement>('#modal-preview-info');
-let selectedFiles: File[] = [];
+const dropArea = document.querySelector('#drop-area');
+const fileInput = document.querySelector('#foto');
+const previewGrid = document.querySelector('#modal-preview-grid');
+const previewInfo = document.querySelector('#modal-preview-info');
+let selectedFiles = [];
 
 dropArea?.addEventListener('click', () => fileInput?.click());
 
@@ -299,7 +261,7 @@ fileInput?.addEventListener('change', function() {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const img = document.createElement('img');
-                img.src = (e.target as FileReader).result as string;
+                img.src = e.target.result;
                 img.className = 'preview-thumb';
                 img.alt = file.name;
                 previewGrid.appendChild(img);
@@ -310,13 +272,13 @@ fileInput?.addEventListener('change', function() {
 });
 
 // --- SUBMIT ---
-document.querySelector<HTMLFormElement>('#churchForm')?.addEventListener('submit', (e) => {
+document.querySelector('#churchForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
     if (selectedFiles.length === 0) return alert('Selecciona fotos.');
 
-    const nombre = document.querySelector<HTMLInputElement>('#nombre')?.value ?? '';
-    const titulo = document.querySelector<HTMLInputElement>('#titulo')?.value ?? '';
-    const cat = document.querySelector<HTMLSelectElement>('#categoria')?.value ?? '';
+    const nombre = document.querySelector('#nombre')?.value ?? '';
+    const titulo = document.querySelector('#titulo')?.value ?? '';
+    const cat = document.querySelector('#categoria')?.value ?? '';
 
     galerias.unshift({
         id: Date.now(),
