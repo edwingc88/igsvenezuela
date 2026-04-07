@@ -1,4 +1,8 @@
-import { v2 as cloudinary } from 'cloudinary';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const cloudinaryPkg = require('cloudinary');
+const cloudinary = cloudinaryPkg.v2;
+
 import { supabase } from './supabase.js';
 
 cloudinary.config({
@@ -6,6 +10,8 @@ cloudinary.config({
     api_key: import.meta.env.CLOUDINARY_API_KEY,
     api_secret: import.meta.env.CLOUDINARY_API_SECRET,
 });
+
+// resto del código igual...
 
 async function obtenerFotos(tag) {
     try {

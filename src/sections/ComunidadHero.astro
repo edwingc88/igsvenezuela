@@ -1,7 +1,11 @@
 ---
 
-const response = await fetch(new URL('/api/galerias', Astro.url));
-const galerias = await response.json();
+/* const response = await fetch(new URL('/api/galerias', Astro.url));
+const galerias = await response.json(); */
+// @ts-ignore
+import { getGalerias } from '../lib/cloudinary.js';
+
+const galerias = await getGalerias();
 
 ---
 
