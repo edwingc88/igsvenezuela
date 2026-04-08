@@ -4,6 +4,7 @@
 const galerias = await response.json(); */
 // @ts-ignore
 import { getGalerias } from '../lib/cloudinary.js';
+import FormularioGaleria from '../components/FormularioGaleria.astro';
 
 const galerias = await getGalerias();
 
@@ -13,35 +14,15 @@ const galerias = await getGalerias();
 <script id="galeria-data" type="application/json" set:html={JSON.stringify(galerias)}></script>
 
 <!-- Modal Formulario -->
-<div id="uploadModal" class="modal-overlay fixed inset-0 z-60  hidden items-center justify-center p-4">
-    <div class="bg-white w-full max-w-2xl rounded-4xl shadow-2xl relative">
-        <button id="btn-cerrar-modal" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-orange-900 transition text-xl font-bold">
-            &times;
+<div id="uploadModal" class="modal-overlay fixed inset-0 z-60 hidden items-center justify-center p-6">
+    <div class="bg-white w-full max-w-2xl rounded-4xl shadow-2xl relative max-h-[95vh] overflow-y-auto">
+        <button id="btn-cerrar-modal" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition rounded-full">
+            <i class="fas fa-times"></i>
         </button>
-        <div class="p-8 md:p-10">
-            <h2 class="text-2xl font-bold text-orange-900 mb-2">Compartir Galería</h2>
-            <p class="text-sm text-gray-500 mb-8">Sube tus fotos para que toda la congregación pueda verlas.</p>
-            <form id="churchForm" class="space-y-5">
-                <div class="grid md:grid-cols-2 gap-4">
-                    <input type="text" id="nombre" placeholder="Tu nombre" class="w-full p-4 bg-gray-50 rounded-2xl outline-none border border-transparent focus:border-orange-500" required>
-                    <select id="categoria" class="w-full p-4 bg-gray-50 rounded-2xl outline-none border border-transparent focus:border-orange-500">
-                        <option>Cultos Dominicales</option>
-                        <option>Obra Social</option>
-                        <option>Ministerio Juvenil</option>
-                    </select>
-                </div>
-                <input type="text" id="titulo" placeholder="Título de la Galería" class="w-full p-4 bg-gray-50 rounded-2xl outline-none border border-transparent focus:border-orange-500" required>
-                <div id="drop-area" class="drop-zone flex flex-col items-center justify-center cursor-pointer hover:bg-orange-50 transition">
-                    <input type="file" id="foto" class="hidden" multiple accept="image/*">
-                    <div id="modal-preview-info" class="text-center py-6">
-                        <p class="text-xs font-bold text-gray-400 uppercase">Seleccionar Imágenes</p>
-                    </div>
-                    <div id="modal-preview-grid" class="flex flex-wrap gap-2 p-4"></div>
-                </div>
-                <button type="submit" class="w-full btn-church py-4 rounded-2xl font-bold text-lg shadow-xl">
-                    Publicar en el Muro
-                </button>
-            </form>
+        <div class="p-4 md:p-6">
+            <h2 class="text-2xl font-bold text-orange-900 mb-1">Compartir Galería</h2>
+            <p class="text-sm text-gray-500 mb-4">Sube tus fotos para que toda la congregación pueda verlas.</p>
+            <FormularioGaleria />
         </div>
     </div>
 </div>
@@ -99,6 +80,41 @@ const galerias = await getGalerias();
     .swiper-slide { width: 100% !important; height: 100%; }
     .swiper-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+    .swiper-button-next,
+    .swiper-button-prev {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 9999px;
+        background: rgba(248, 113, 20, 0.95);
+        color: white;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+    .swiper-button-next { right: 12px; }
+    .swiper-button-prev { left: 12px; }
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+        background: rgba(255, 159, 67, 0.95);
+    }
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        display: none;
+    }
+
+    .swiper-navigation-icon-text {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1;
+        pointer-events: none;
+    }
+
     .modal-overlay {
     background: rgba(0,0,0,0.7);
     backdrop-filter: blur(4px);
@@ -116,7 +132,7 @@ const galerias = await getGalerias();
 <script>
 // @ts-nocheck
 import Swiper from 'swiper';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -157,8 +173,12 @@ function renderGalerias() {
                         <div class="swiper-wrapper">
                             ${g.imagenes.map((src, i) => `<div class="swiper-slide"><img src="${src}" alt="foto ${i + 1}"></div>`).join('')}
                         </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                        <button type="button" class="swiper-button-next" aria-label="Siguiente">
+                            <span class="swiper-navigation-icon-text">›</span>
+                        </button>
+                        <button type="button" class="swiper-button-prev" aria-label="Anterior">
+                            <span class="swiper-navigation-icon-text">‹</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -171,17 +191,56 @@ function renderGalerias() {
 
 function initSwiper(id) {
     const key = `swiper-${id}`;
+    console.log('[Swiper] inicializando', key);
+    const container = document.querySelector(`#${key}`);
+    if (!container) {
+        console.warn('[Swiper] contenedor no encontrado', key);
+        return;
+    }
+
+    const slideCount = container.querySelectorAll('.swiper-slide').length;
+    console.log('[Swiper] slides encontradas', slideCount, 'para', key);
+
     // Destruir instancia previa si existe
     if (swiperInstances.has(key)) {
         swiperInstances.get(key).destroy(true, true);
         swiperInstances.delete(key);
     }
-    const instance = new Swiper(`#${key}`, {
-        modules: [Navigation, Autoplay],
-        loop: true,
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        autoplay: { delay: 3500 },
+
+    const nextEl = container.querySelector('.swiper-button-next');
+    const prevEl = container.querySelector('.swiper-button-prev');
+    console.log('[Swiper] nextEl', nextEl, 'prevEl', prevEl);
+
+    if (nextEl) {
+        nextEl.addEventListener('click', () => console.log('[Swiper] boton next clic')); 
+    }
+    if (prevEl) {
+        prevEl.addEventListener('click', () => console.log('[Swiper] boton prev clic')); 
+    }
+
+    const instance = new Swiper(container, {
+        modules: [Navigation],
+        loop: false,
+        slidesPerView: 1,
+        spaceBetween: 16,
+        navigation: {
+            nextEl,
+            prevEl,
+            disabledClass: 'swiper-button-disabled',
+            hiddenClass: 'swiper-button-hidden',
+        },
+        uniqueNavElements: false,
+        watchOverflow: true,
+        observer: true,
+        observeParents: true,
+        on: {
+            init() {
+                this.update();
+            },
+        },
     });
+
+    instance.update();
     swiperInstances.set(key, instance);
 }
 
@@ -190,7 +249,7 @@ function bindToggleEvents() {
         btn.addEventListener('click', () => {
             const viewType = btn.getAttribute('data-view');
             const article = btn.closest('article');
-            const id = Number(article?.getAttribute('data-id'));
+            const id = article?.getAttribute('data-id');
             const toggleContainer = btn.closest('div');
 
             toggleContainer?.querySelectorAll('.btn-toggle').forEach(b => {
@@ -209,7 +268,14 @@ function bindToggleEvents() {
             } else {
                 if (bentoView) bentoView.style.display = 'none';
                 if (sliderView) sliderView.style.display = 'block';
-                initSwiper(id);
+                setTimeout(() => {
+                    console.log('[Swiper] mostrar slider', id);
+                    initSwiper(id);
+                    const instance = swiperInstances.get(`swiper-${id}`);
+                    if (instance) {
+                        instance.update();
+                    }
+                }, 100);
             }
         });
     });
@@ -229,74 +295,6 @@ function bindDownloadEvents() {
         });
     });
 }
-
-// --- MODAL ---
-const modal = document.querySelector('#uploadModal');
-
-const closeModal = () => {
-    modal?.classList.remove('active');
-    document.body.style.overflow = 'auto';
-};
-
-document.querySelector('#btn-subir-fotos')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    modal?.classList.add('active');
-    document.body.style.overflow = 'hidden';
-});
-
-document.querySelector('#btn-cerrar-modal')?.addEventListener('click', closeModal);
-
-// --- PREVIEW MODAL ---
-const dropArea = document.querySelector('#drop-area');
-const fileInput = document.querySelector('#foto');
-const previewGrid = document.querySelector('#modal-preview-grid');
-const previewInfo = document.querySelector('#modal-preview-info');
-let selectedFiles = [];
-
-dropArea?.addEventListener('click', () => fileInput?.click());
-
-fileInput?.addEventListener('change', function() {
-    selectedFiles = Array.from(this.files ?? []);
-    if (!previewGrid) return;
-    previewGrid.innerHTML = '';
-    if (selectedFiles.length > 0) {
-        previewInfo?.classList.add('hidden');
-        selectedFiles.forEach(file => {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.className = 'preview-thumb';
-                img.alt = file.name;
-                previewGrid.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-});
-
-// --- SUBMIT ---
-document.querySelector('#churchForm')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (selectedFiles.length === 0) return alert('Selecciona fotos.');
-
-    const nombre = document.querySelector('#nombre')?.value ?? '';
-    const titulo = document.querySelector('#titulo')?.value ?? '';
-    const cat = document.querySelector('#categoria')?.value ?? '';
-
-    galerias.unshift({
-        id: Date.now(),
-        autor: nombre,
-        categoria: cat,
-        categoriaColor: 'text-orange-600 bg-orange-50',
-        titulo,
-        fecha: 'Recién publicado',
-        imagenes: selectedFiles.map(f => URL.createObjectURL(f))
-    });
-
-    renderGalerias();
-    closeModal();
-});
 
 renderGalerias();
 </script>

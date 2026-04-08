@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+
+const title = 'Tu Acordes Cristianos'
+const description =
+  'Encuentra acordes, letras y diagramas para guitarra y piano de tus canciones cristianas favoritas'
+const canonical = 'https://www.infolavelada.com/'
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+ <!-- PÁGINA: NOSOTROS -->
+    <main id="page-nosotros" class="page-content  py-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Pastores Banner Horizontal con Nombre Dentro -->
+            <section class="mb-16">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold text-orange-900 italic">Nuestros Pastores</h2>
+                </div>
+
+                <div class="pastor-banner-full">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=1400" alt="Pastores">
+                    <div class="pastor-info-overlay">
+                        <h4 class="text-4xl font-bold italic">Carlos y Carlida de Vaez </h4>
+     <p class="text-orange-200 text-sm tracking-widest uppercase mt-1 max-w-lg">
+    "Somos la Iglesia de Restauración Familiar: un lugar de esperanza, sanidad y nuevos comienzos para ti y los tuyos. 🛡️🙏"
+</p>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Misión y Visión Contrastados -->
+            <section class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="card-mission p-12 rounded-[50px] shadow-xl hover:scale-[1.01] transition-transform">
+                    <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-800 text-2xl mb-6">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-orange-900 mb-4 italic">Nuestra Misión</h3>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Llevar el mensaje de esperanza a cada rincón, sirviendo a nuestra comunidad con integridad y amor cristiano, formando discípulos que impacten su entorno.
+                    </p>
+                </div>
+                <div class="card-vision p-12 rounded-[50px] shadow-2xl hover:scale-[1.01] transition-transform">
+                    <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-white text-2xl mb-6">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-4 italic">Nuestra Visión</h3>
+                    <p class="text-orange-50/90 leading-relaxed text-lg">
+                        Ser una iglesia modelo en el servicio y la unidad, reconocida por su compromiso social y espiritual en la transformación positiva de nuestra nación.
+                    </p>
+                </div>
+            </section>
+            <!-- Cita y Te Esperamos (Diseño Lateral Restaurado) -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center ">
+                <div class="biblical-badge-card">
+                    <i class="fas fa-quote-left text-5xl text-orange-300/20 mb-4 block"></i>
+                    <p class="text-2xl md:text-3xl font-serif italic leading-relaxed">
+                        "Hubiera yo desmayado, si no creyese que veré la bondad de Jehová en la tierra de los vivientes."
+                    </p>
+                    <div class="mt-8 flex items-center justify-end">
+                        <span class="text-orange-200 font-bold tracking-widest text-sm uppercase">Salmos 27:13</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-12 rounded-[40px] shadow-sm border border-orange-50">
+                    <h5 class="text-3xl font-bold text-orange-900 mb-6 italic">¡Te esperamos con amor!</h5>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                        Nuestra puerta y nuestro corazón están abiertos para ti. Creemos que cada persona es un tesoro para Dios. Ven a compartir una palabra de vida y una comunidad que te apoya.
+                    </p>
+                    <button onclick="window.scrollTo(0,document.body.scrollHeight)" class="btn-church px-8 py-4 rounded-2xl font-bold flex items-center gap-3 text-lg">
+                        <i class="fas fa-map-marker-alt"></i> Sabes cómo llegar ?
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <style>
+         /* Sección de Pastores - Banner Horizontal con Nombre Dentro */
+        .pastor-banner-full {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .pastor-banner-full img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .pastor-info-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 60px 40px 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            color: white;
+        }
+
+        .biblical-badge-card {
+            background: linear-gradient(135deg, #8c4b1d 0%, #4a2710 100%);
+            color: white;
+            border-radius: 35px;
+            padding: 3rem;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(74, 39, 16, 0.2);
+        }
+
+        /* Misión y Visión Contrastados */
+        .card-mission {
+            background: white;
+            border: 1px solid #f1f1f1;
+            color: #3d2b1f;
+        }
+        
+        .card-vision {
+            background: #8c4b1d;
+            color: #fdfaf6;
+        }
+    </style>
+
+</Layout>

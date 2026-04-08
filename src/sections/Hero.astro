@@ -1,3 +1,7 @@
+---
+import FormularioGaleria from '../components/FormularioGaleria.astro';
+---
+
     <!-- PÁGINA: INICIO -->
     <main id="page-inicio" class="page-content">
         <!-- Hero Section -->
@@ -9,7 +13,7 @@
                 </p>
                 <div class="flex flex-wrap justify-center gap-4">
                     <button onclick="showPage('contacto')" class="bg-white text-orange-900 px-8 py-4 rounded-xl font-bold shadow-xl hover:bg-orange-50 transition transform hover:scale-105">
-                        <i class="fas fa-hands-helping mr-2"></i> Quiero que oren por mí / Visitar
+                        <i class="fas fa-praying-hands mr-2"></i> Quiero que oren por mí / Visitar
                     </button>
                     <button onclick="showPage('servicios')" class="bg-orange-700/30 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-orange-700/50 transition">
                         Ver horarios de Cultos
@@ -22,8 +26,10 @@
             <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
                 <div class="relative">
                     <div class="absolute -top-4 -left-4 w-24 h-24 bg-orange-100 rounded-full -z-10"></div>
-                    <img src="pastorBanderaVnz.jpg" class="rounded-3xl shadow-2xl border-4 border-white transform -rotate-2 hover:rotate-0 transition duration-500">
-                    <div class="absolute bottom-6 right-6 bg-white px-6 py-2 rounded-full shadow-lg border border-orange-50">
+<!--                     <img src="pastorBanderaVnz.jpg" class="rounded-3xl shadow-2xl border-4 border-white transform -rotate-2 hover:rotate-0 transition duration-500">
+ -->         <img src="pastorBanderaVnz.jpg" class="rounded-3xl shadow-2xl border-4 border-white transform -rotate-2 hover:rotate-0 transition duration-500 max-w-sm md:max-w-md w-full ml-auto">
+
+           <div class="absolute bottom-6 right-6 bg-white px-6 py-2 rounded-full shadow-lg border border-orange-50">
                         <p class="text-orange-900 font-bold italic">Pastor Principal</p>
                     </div>
                 </div>
@@ -44,8 +50,60 @@
                 </div>
             </div>
         </section>
+        
+        <!-- Sección Video + Mensaje -->
+     <section class="py-20 px-6 bg-orange-50/50">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+            <!-- Mensaje izquierda -->
+            <div class="space-y-6">
+                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-4 py-2 rounded-full uppercase tracking-widest">
+                    Síguenos en redes
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-orange-900 italic leading-tight">
+                    "Llevamos la Palabra a donde estés"
+                </h2>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Cada semana publicamos mensajes cortos llenos de fe en nuestras redes sociales. Síguenos y recibe una palabra de aliento directo en tu feed.
+                </p>
+                <div class="flex flex-col gap-3">
+                    <a href="https://www.instagram.com" target="_blank" class="inline-flex items-center gap-3 text-pink-600 font-bold text-lg hover:text-pink-500 transition">
+                        <i class="fab fa-instagram text-2xl"></i>
+                        Síguenos en Instagram
+                    </a>
+                    <a href="https://wa.me/tuNumero" target="_blank" class="inline-flex items-center gap-3 text-green-600 font-bold text-lg hover:text-green-500 transition">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                        Únete a nuestro WhatsApp
+                    </a>
+                    <a href="https://www.youtube.com/@tuCanal" target="_blank" class="inline-flex items-center gap-3 text-red-600 font-bold text-lg hover:text-red-500 transition">
+                        <i class="fab fa-youtube text-2xl"></i>
+                        Suscríbete en YouTube
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video YouTube Short derecha -->
+            <div class="flex justify-center">
+                <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white w-[280px]">
+                    <iframe
+                        src="https://www.youtube.com/embed/nKAfXV7VxLA"
+                        title="Mensaje de la Iglesia"
+                        class="w-full"
+                        style="height: 500px;"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
         <!-- Formulario de Galería de Fotos -->
-        <section id="seccion-subir" class="py-20 px-6">
+        <section id="seccion-subir" class="py-20 px-6 bg-linear-to-b from-orange-50/50 to-bg-orange-100 ">
             <div class="max-w-3xl mx-auto">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold text-orange-900 mb-4 uppercase tracking-wider">Muro de Recuerdos</h2>
@@ -53,56 +111,7 @@
                 </div>
 
                 <div class="bg-white p-8 md:p-10 rounded-3xl card-shadow border border-orange-50">
-                    <form id="churchForm" class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-bold text-orange-900 mb-2" for="nombre">Publicado por:</label>
-                                <input type="text" id="nombre" placeholder="Tu nombre o familia" 
-                                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 outline-none transition" required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-orange-900 mb-2" for="categoria">Categoría</label>
-                                <select id="categoria" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 outline-none transition bg-white">
-                                    <option value="General">General</option>
-                                    <option value="Cultos">Cultos Dominicales</option>
-                                    <option value="Social">Obra Social</option>
-                                    <option value="Jovenes">Ministerio Juvenil</option>
-                                    <option value="Ninos">Escuela Dominical</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-bold text-orange-900 mb-2" for="titulo">Título de la Galería</label>
-                            <input type="text" id="titulo" placeholder="Ej: Fotos del Bautizo" 
-                                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 outline-none transition" required>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-bold text-orange-900 mb-2">Selecciona tus fotos (pueden ser varias)</label>
-                            <div id="drop-area" class="drop-zone relative rounded-2xl flex flex-col items-center justify-center cursor-pointer overflow-hidden bg-gray-50">
-                                <input type="file" id="foto" class="hidden" accept="image/*" multiple>
-                                
-                                <div id="preview-container" class="preview-grid hidden">
-                                    <!-- Aquí se cargarán las miniaturas -->
-                                </div>
-
-                                <div id="empty-preview" class="text-center py-10">
-                                    <i class="fas fa-images text-5xl text-orange-200 mb-4"></i>
-                                    <p class="text-gray-400 font-medium px-4">Haz clic para elegir una o varias fotos</p>
-                                </div>
-                                
-                                <button id="remove-img" type="button" class="hidden absolute top-3 right-3 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg z-20">
-                                    <i class="fas fa-trash-alt text-xs"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="w-full btn-church text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center space-x-2">
-                            <span>Publicar Galería en el Muro</span>
-                            <i class="fas fa-th"></i>
-                        </button>
-                    </form>
+                    <FormularioGaleria />
                 </div>
             </div>
         </section>

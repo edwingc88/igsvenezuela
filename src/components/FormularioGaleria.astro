@@ -1,0 +1,127 @@
+---
+// Componente reutilizable para el formulario de galería
+---
+
+<form id="churchForm" class="space-y-3">
+    <div class="grid md:grid-cols-2 gap-4">
+        <div>
+            <label class="block text-sm font-bold text-orange-900 mb-2" for="nombre">Publicado por:</label>
+            <input type="text" id="nombre" placeholder="Tu nombre o familia" 
+                class="w-full px-4 py-2 rounded-xl border border-gray-200 focus:border-orange-500 outline-none transition" required>
+        </div>
+        <div>
+            <label class="block text-sm font-bold text-orange-900 mb-2" for="categoria">Categoría</label>
+            <select id="categoria" class="w-full px-4 py-2 rounded-xl border border-gray-200 focus:border-orange-500 outline-none transition bg-white">
+                <option>General</option>
+                <option>Martes de Intersecion y alabanza</option>
+                <option>Jueves de Fe y Poder</option>
+                <option>Domingo de Celebracion</option>
+                <option>Servicio de Juvenil</option>
+                <option>Servicio Especial</option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <label class="block text-sm font-bold text-orange-900 mb-2" for="titulo">Título de la Galería</label>
+        <input type="text" id="titulo" placeholder="Ej: Fotos del Bautizo" 
+            class="w-full px-4 py-2 rounded-xl border border-gray-200 focus:border-orange-500 outline-none transition" required>
+    </div>
+
+    <div>
+        <label class="block text-sm font-bold text-orange-900 mb-2">Selecciona tus fotos (pueden ser varias)</label>
+        <div id="drop-area" class="drop-zone relative rounded-2xl flex flex-col items-center justify-center cursor-pointer overflow-hidden bg-gray-50">
+            <input type="file" id="foto" class="hidden" accept="image/*" multiple>
+            
+            <div id="modal-preview-grid" class="flex flex-wrap gap-2 p-4">
+                <!-- Aquí se cargarán las miniaturas -->
+            </div>
+
+            <div id="modal-preview-info" class="text-center py-6">
+                <i class="fas fa-images text-5xl text-orange-200 mb-4"></i>
+                <p class="text-gray-400 font-medium px-4">Haz clic para elegir una o varias fotos</p>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="w-full btn-church text-white font-bold py-2.5 rounded-xl shadow-lg flex items-center justify-center space-x-2">
+        <span>Publicar Galería en el Muro</span>
+        <i class="fas fa-th"></i>
+    </button>
+</form>
+
+<script>
+// @ts-nocheck
+// Script para manejar el formulario, preview y modal (si existe)
+const modal = document.querySelector('#uploadModal');
+
+const closeModal = () => {
+    modal?.classList.remove('active');
+    document.body.style.overflow = 'auto';
+};
+
+document.querySelector('#btn-subir-fotos')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    modal?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+});
+
+document.querySelector('#btn-cerrar-modal')?.addEventListener('click', closeModal);
+
+// --- PREVIEW MODAL ---
+const dropArea = document.querySelector('#drop-area');
+const fileInput = document.querySelector('#foto');
+const previewGrid = document.querySelector('#modal-preview-grid');
+const previewInfo = document.querySelector('#modal-preview-info');
+let selectedFiles = [];
+
+dropArea?.addEventListener('click', () => fileInput?.click());
+
+fileInput?.addEventListener('change', function() {
+    selectedFiles = Array.from(this.files ?? []);
+    if (!previewGrid) return;
+    previewGrid.innerHTML = '';
+    if (selectedFiles.length > 0) {
+        previewInfo?.classList.add('hidden');
+        selectedFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'preview-thumb';
+                img.alt = file.name;
+                previewGrid.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+});
+
+// --- SUBMIT ---
+document.querySelector('#churchForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (selectedFiles.length === 0) return alert('Selecciona fotos.');
+
+    const nombre = document.querySelector('#nombre')?.value ?? '';
+    const titulo = document.querySelector('#titulo')?.value ?? '';
+    const cat = document.querySelector('#categoria')?.value ?? '';
+
+    if (typeof galerias !== 'undefined') {
+        galerias.unshift({
+            id: Date.now(),
+            autor: nombre,
+            categoria: cat,
+            categoriaColor: 'text-orange-600 bg-orange-50',
+            titulo,
+            fecha: 'Recién publicado',
+            imagenes: selectedFiles.map(f => URL.createObjectURL(f))
+        });
+
+        if (typeof renderGalerias === 'function') {
+            renderGalerias();
+        }
+    }
+
+    closeModal();
+});
+</script>
