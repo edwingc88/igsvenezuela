@@ -6,12 +6,12 @@ const cloudinary = cloudinaryPkg.v2;
 import { supabase } from './supabase.js';
 
 
-
+/* 
 console.log('🔍 Cloudinary Cloud Name:', cloudName ? '✅ Presente' : '❌ Faltante');
 console.log('🔍 Cloudinary API Key:', apiKey ? '✅ Presente' : '❌ Faltante');
 console.log('🔍 Cloudinary API Secret:', apiSecret ? '✅ Presente' : '❌ Faltante');
 
-
+ */
 cloudinary.config({
     cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
     api_key: import.meta.env.CLOUDINARY_API_KEY,
