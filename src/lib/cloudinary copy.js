@@ -1,4 +1,10 @@
-import { v2 as cloudinary } from 'cloudinary';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const cloudinaryPkg = require('cloudinary');
+const cloudinary = cloudinaryPkg.v2;
+
+import { supabase } from './supabase.js';
+
 
 cloudinary.config({
     cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
@@ -6,57 +12,40 @@ cloudinary.config({
     api_secret: import.meta.env.CLOUDINARY_API_SECRET,
 });
 
-// Mapa de categorías a carpetas de Cloudinary
-const CATEGORIAS = {
-    'Servicio General':       { color: 'text-slate-600 bg-slate-50',   folder: 'iglesia/servicio-general' },
-    'Domingo de Celebración': { color: 'text-red-600 bg-red-50',       folder: 'iglesia/domingo-celebracion' },
-    'Martes de Intercesión':  { color: 'text-purple-600 bg-purple-50', folder: 'iglesia/martes-intercesion' },
-    'Jueves de Fe y Poder':   { color: 'text-blue-600 bg-blue-50',     folder: 'iglesia/jueves-fe-poder' },
-    'Servicio de Jóvenes':    { color: 'text-green-600 bg-green-50',   folder: 'iglesia/jovenes' }
-};
+// resto del código igual...
 
-// Usuarios ficticios — reemplazar por Supabase en el futuro
-const USUARIOS = [
-    {
-        id: 1,
-        autor: 'Familia Rodriguez',
-        titulo: 'Jornada de Alimentos en Petare',
-        fecha: 'Hace 2 días',
-        categoria: 'Servicio General'
-    },
-    {
-        id: 2,
-        autor: 'Hno. Gabriel M.',
-        titulo: 'Domingo de Resurrección',
-        fecha: 'Hace 1 semana',
-        categoria: 'Domingo de Celebración'
-    }
-];
-
-async function obtenerFotos(folderPath) {
+async function obtenerFotos(tag) {
     try {
-        const { resources } = await cloudinary.api.resources({
-            type: 'upload',
-            prefix: folderPath,
+        console.log('Buscando tag:', tag);
+        const { resources } = await cloudinary.api.resources_by_tag(tag, {
             max_results: 12
         });
+        console.log('Recursos encontrados:', resources.length);
         return resources.map(file => file.secure_url);
     } catch (e) {
+        console.log('Error Cloudinary completo:', JSON.stringify(e));
         return [];
     }
 }
 
-export const galerias = await Promise.all(
-    USUARIOS.map(async (usuario) => {
-        const cat = CATEGORIAS[usuario.categoria];
-        return {
-            id: usuario.id,
-            autor: usuario.autor,
-            titulo: usuario.titulo,
-            fecha: usuario.fecha,
-            categoria: usuario.categoria,
-            categoriaColor: cat.color,
-            imagenes: await obtenerFotos(cat.folder)
-        };
-    })
-);
+
+export async function getGalerias() {
+    const { data, error } = await supabase
+        .from('galerias')
+        .select('*')
+        .order('fecha', { ascending: false });
+
+    if (error || !data) return [];
+
+    return await Promise.all(
+        data.map(async (g) => ({
+            id: g.id,
+            autor: g.autor,
+            titulo: g.titulo,
+            categoria: g.categoria,
+            categoriaColor: g.categoria_color,
+            fecha: new Date(g.fecha).toLocaleDateString('es-ES', { dateStyle: 'long' }),
+            imagenes: await obtenerFotos(g.cloudinary_tag)
+        }))
+    );
+}
