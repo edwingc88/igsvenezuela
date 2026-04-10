@@ -2,10 +2,6 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
             <a href="/" class="flex items-center space-x-3">
-     <!--            <div class="w-12 h-12 bg-orange-800 rounded-full flex items-center justify-center overflow-hidden">
-                    <i class="fas fa-church text-white"></i>
-                </div>
-                <span class="font-bold text-xl tracking-tight text-orange-900 uppercase leading-tight hidden sm:block text-left">Iglesia de<br>Jesucristo</span> -->
                 <img src="/logoigs.png" alt="Logo de la Iglesia" class="w-22 object-cover ">
             </a>
             <div class="hidden md:flex items-center space-x-8 font-medium text-orange-900">
@@ -17,6 +13,33 @@
                     Contacto<i class="fas fa-address-book ml-2 text-white"></i>
                 </a>
             </div>
+
+            
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-orange-900 focus:outline-none hover:text-orange-800 hover:cursor-pointer">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>    
         </div>
     </div>
+<!-- Menú Móvil (Ahora oculto por defecto con 'hidden') -->
+<div id="mobile-menu" class="hidden md:hidden bg-white border-b border-orange-100 flex-col space-y-4 px-4 py-6 font-medium text-orange-900 transition-all duration-300">
+    <a href="/" class="hover:text-orange-600">Inicio</a>
+    <a href="/nosotros" class="hover:text-orange-600">Quiénes Somos</a>
+    <a href="/servicios" class="hover:text-orange-600">Servicios</a>
+    <a href="/comunidad" class="hover:text-orange-600">Comunidad</a>
+    <a href="/contacto" class="text-orange-600 font-bold">Contacto</a>
+</div>
+
 </nav>
+<script>
+    const btn = document.querySelector('#mobile-menu-button');
+    const menu = document.querySelector('#mobile-menu');
+
+    btn?.addEventListener('click', () => {
+        // Esto quita 'hidden' y agrega 'flex' (o viceversa)
+        menu?.classList.toggle('hidden');
+        menu?.classList.toggle('flex'); 
+    });
+</script>
+
