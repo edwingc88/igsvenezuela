@@ -18,7 +18,7 @@ const canonical = 'https://www.infolavelada.com/'
 
                 <div class="pastor-banner-full">
                     <img src="iglesia-gente.jpg" alt="iglesia banner">
-                    <div class="pastor-info-overlay">
+                    <div class="pastor-info-overlay ">
                         <h4 class="text-4xl font-bold italic">Iglesia de Jesucristo de Venezuela</h4>
      <p class="text-orange-200 text-sm tracking-widest uppercase mt-1 max-w-lg">
     "Bajo la guía de los pastores Carlos y Carlida de Báez, somos una iglesia de  restauración familiar. Un lugar de esperanza, sanidad y nuevos comienzos para ti y los tuyos. 🛡️🙏"
@@ -93,14 +93,23 @@ const canonical = 'https://www.infolavelada.com/'
             display: block;
         }
 
+        .pastor-banner-full::before{
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26, 16, 1, 0.918) 0%, #4a271075 35% , transparent 100%);
+            z-index: 1;
+        }
+
         .pastor-info-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             padding: 60px 40px 30px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+ /*            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); */
             color: white;
+            z-index: 100;
         }
 
         .biblical-badge-card {

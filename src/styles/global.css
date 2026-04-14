@@ -27,9 +27,6 @@
             scroll-behavior: smooth;
         }
 
-        .bg-church-gradient {
-            background: linear-gradient(135deg, #a65d26 0%, #633314 100%);
-        }
 
                 .btn-church {
             background-color: var(--color-principal);

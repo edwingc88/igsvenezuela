@@ -5,7 +5,7 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
     <!-- PÁGINA: INICIO -->
     <main id="page-inicio" class="page-content">
         <!-- Hero Section -->
-        <header class="relative overflow-hidden bg-church-gradient text-white py-24 px-6 text-center">
+        <header class="bg-logo relative overflow-hidden bg-church-gradient text-white py-24 px-6 text-center">
             <div class="max-w-4xl mx-auto relative z-10">
                 <h1 class="text-4xl md:text-6xl font-bold mb-6 italic">Te esperamos con los brazos abiertos</h1>
                 <p class="text-lg md:text-xl opacity-90 mb-10 leading-relaxed">
@@ -13,7 +13,7 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
                 </p>
                 <div class="flex flex-wrap justify-center gap-4">
                     <button onclick="showPage('contacto')" class="bg-white text-orange-900 px-8 py-4 rounded-xl font-bold shadow-xl hover:bg-orange-50 transition transform hover:scale-105">
-                        <i class="fas fa-praying-hands mr-2"></i> Quiero que oren por mí / Visitar
+                        <i class="fas fa-praying-hands mr-2"></i> Quiero que oren por mí 
                     </button>
                     <button onclick="showPage('servicios')" class="bg-orange-700/30 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-orange-700/50 transition">
                         Ver horarios de Cultos
@@ -170,6 +170,7 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
             color: white;
             margin-top: 6rem;
         }
+        
 
         .bank-details-glass {
             background: rgba(255, 255, 255, 0.1);
@@ -178,6 +179,49 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
             border-radius: 30px;
             padding: 35px;
         }
+      /*       background: linear-gradient(135deg, #a65d26 0%, #633314 100%); */
+        
+      /*       background: linear-gradient(135deg, #a65d26 0%, #633314 100%), url('logo--blanco.png'); */
+
+.bg-church-gradient {
+    position: relative; /* Necesario para contener la capa del logo */
+    width: 100%;
+    background: linear-gradient(135deg, #a65d26 0%, #633314 100%);
+    overflow: hidden;
+}
+
+.bg-church-gradient::before {
+content: "";
+    position: absolute;
+    top: -15%; left: 0; right: -5%; bottom: 0;
+    
+    /* 1. Ponemos la imagen Y el mismo degradado (o un color base) */
+    background-image: url('logo--blanco.png'), 
+                      linear-gradient(135deg, #a65d26 0%, #633314 100%);
+    
+    background-size: 45%, cover;
+    background-repeat: no-repeat;
+    background-position: top right, center;
+
+    /* 2. LA MAGIA: Esto mezcla la imagen con el degradado del paso 1 */
+    background-blend-mode: soft-light; /* Prueba también con 'multiply' o 'luminosity' */
+    
+    /* 3. Ajuste fino de presencia */
+    opacity: 0.05;
+}
+
+
+
+/*         .bg-logo::before{
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url('logo--blanco.png') no-repeat right ;
+            background-size: contain;
+            background-blend-mode: saturation;
+            opacity: 0.1;
+            z-index: 1;
+        } */
     </style>
    
 
