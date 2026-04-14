@@ -11,7 +11,7 @@ const canonical = 'https://www.infolavelada.com/'
 <Layout title={title} description={description} canonical={canonical}>
        
     <!-- PÁGINA: CONTACTO -->
-    <main id="page-contacto" class="page-content  py-20 px-6">
+    <main id="page-contacto" class="page-content  pt-12 pb-20 px-6">
         <div class="max-w-6xl mx-auto">
             
             <div class="text-center mb-16">
@@ -22,10 +22,10 @@ const canonical = 'https://www.infolavelada.com/'
             <div class="grid lg:grid-cols-12 gap-12 items-start">
                 
                 <!-- Columna Izquierda: Info -->
-                <div class="lg:col-span-4 space-y-6">
-                    <div class="info-card-main">
-                        <h3 class="text-2xl font-bold mb-6 italic border-b border-white/20 pb-2">Información</h3>
-                        <div class="space-y-4">
+                <div class="lg:col-span-4 space-y-5">
+                    <div class="info-card-main py-9 px-10">
+                        <h3 class="text-2xl font-bold mb-4 italic border-b border-white/20 pb-2">Información</h3>
+                        <div class="space-y-2">
                             <div class="flex items-start gap-4">
                                 <i class="fas fa-map-marker-alt mt-1"></i>
                                 <p>Caracas, Venezuela. Cerca del metro.</p>
@@ -39,42 +39,47 @@ const canonical = 'https://www.infolavelada.com/'
                                 <p>info@iglesiajesucristo.ve</p>
                             </div>
                             
-                            <!-- NUEVA SECCIÓN: Referencia a Diezmos y Ofrendas -->
+                            <!-- NUEVA SECCIÓN: Redes Sociales -->
                             <div class="pt-4 mt-6 border-t border-white/20">
-                                <div class="flex items-center gap-4 text-orange-300">
-                                    <i class="fas fa-hand-holding-heart text-2xl"></i>
+                                <div class="flex  gap-4 text-orange-300">
+                                    <i class="fas mt-1 fa-network-wired text-1xl"></i>
                                     <div>
-                                        <p class="font-bold text-white italic text-lg">Redes Sociales</p>
-                                        <p class="text-xs text-orange-100/70 uppercase tracking-tighter">Sigue hacia abajo para datos bancarios</p>
+                                        <p class="font-bold text-white italic text-md">Redes Sociales</p>
+                                            <div class="flex space-x-4 mt-2">
+                                            <a href="#" class="w-8 h-8 rounded-full bg-orange-900 flex items-center justify-center text-white hover:bg-orange-600 transition"><i class="fab fa-facebook-f"></i></a>
+                                            <a href="#" class="w-8 h-8 rounded-full bg-orange-900 flex items-center justify-center text-white hover:bg-orange-600 transition"><i class="fab fa-instagram"></i></a>
+                                            <a href="#" class="w-8 h-8 rounded-full bg-orange-900 flex items-center justify-center text-white hover:bg-orange-600 transition"><i class="fab fa-youtube"></i></a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="flex justify-center mt-4">
-                                    <i class="fas fa-chevron-down animate-bounce-subtle text-orange-300"></i>
                                 </div>
                             </div>
 
                                                 <div class="bank-details-glass">
-                        <div class="flex items-center gap-4 mb-8">
-                            <i class="fas fa-university text-3xl text-orange-400"></i>
-                            <h4 class="text-lg font-bold italic">Datos Bancarios</h4>
+                        <div class="flex items-center gap-4 mb-3">
+                            <i class="fas  fa-hand-holding-heart text-1xl text-orange-300"></i>
+                            <h4 class="text-md font-bold italic">Diezmos y Ofrendas</h4>
                         </div>
-                        <div class="space-y-5">
+                        <div class="space-y-4 ml-8">
                             <div>
-                                <p class="text-[10px] uppercase tracking-widest opacity-60 mb-1">Banco</p>
+                                <p class="text-[10px] uppercase tracking-widest opacity-60 mb-1">Datos para deposito o pago movil</p>
                                 <p class="text-sm font-medium">Banesco Banco Universal</p>
                             </div>
                             <div>
                                 <p class="text-[10px] uppercase tracking-widest opacity-60 mb-1">Cuenta Corriente</p>
                                 <p class="text-sm font-mono">0134-XXXX-XX-XXXXXXXXXX</p>
                             </div>
-                            <div>
-                                <p class="text-[10px] uppercase tracking-widest opacity-60 mb-1">Titular</p>
-                                <p class="text-sm">Iglesia de Jesucristo</p>
-                            </div>
+                            <div class="flex gap-4 ">
+
                             <div>
                                 <p class="text-[10px] uppercase tracking-widest opacity-60 mb-1">RIF / Cédula</p>
                                 <p class="text-sm">J-12345678-9</p>
                             </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-widest opacity-60 mb-1">Telefono </p>
+                                <p class="text-sm">0414-123-4567</p>
+                            </div>
+                            </div>
+   
                         </div>
                     </div>
 
@@ -102,7 +107,7 @@ const canonical = 'https://www.infolavelada.com/'
                                 <input type="text" placeholder="Tu Nombre" class="form-input">
                                 <input type="text" placeholder="WhatsApp / Teléfono" class="form-input">
                             </div>
-                            <textarea placeholder="Cuéntanos un poco más..." rows="5" class="form-input resize-none"></textarea>
+                            <textarea placeholder="Cuéntanos un poco más..." rows="6" class="form-input resize-none"></textarea>
                             <button type="button" class="w-full py-5 btn-church rounded-2xl font-bold text-lg shadow-xl uppercase tracking-widest">
                                 Enviar a Secretaría
                             </button>
@@ -123,7 +128,6 @@ const canonical = 'https://www.infolavelada.com/'
             background: #a63d05;
             color: white;
             border-radius: 35px;
-            padding: 40px;
             box-shadow: 0 15px 30px rgba(166, 61, 5, 0.2);
         }
         
