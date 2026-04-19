@@ -11,14 +11,21 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
                 <p class="text-lg md:text-xl opacity-90 mb-10 leading-relaxed">
                     Somos una familia en Venezuela que camina en fe. Si buscas un lugar donde congregarte, necesitas oración o simplemente quieres conocernos, este es tu hogar.
                 </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <button onclick="showPage('contacto')" class="bg-white text-orange-900 px-8 py-4 rounded-xl font-bold shadow-xl hover:bg-orange-50 transition transform hover:scale-105">
-                        <i class="fas fa-praying-hands mr-2"></i> Quiero que oren por mí 
-                    </button>
-                    <button onclick="showPage('servicios')" class="bg-orange-700/30 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-orange-700/50 transition">
-                        Ver horarios de Cultos
-                    </button>
-                </div>
+<div class="flex flex-wrap justify-center gap-4">
+  <a 
+    href="/contacto" 
+    class="inline-block bg-white text-orange-900 px-8 py-4 rounded-xl font-bold shadow-xl hover:bg-orange-50 transition transform hover:scale-105 cursor-pointer"
+  >
+    <i class="fas fa-praying-hands mr-2"></i> Quiero que oren por mí 
+  </a>
+
+  <a 
+    href="/servicios" 
+    class="inline-block bg-orange-700/30 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-orange-700/50 transition hover:scale-105 cursor-pointer"
+  >
+    Ver horarios de Servicios
+  </a>
+</div>
             </div>
         </header>
         <!-- Mensaje del Pastor / Invitación a la Salvación -->
@@ -56,11 +63,11 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
         <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
             <!-- Mensaje izquierda -->
-            <div class="space-y-6 ml-14">
-                <span class="text-xs font-bold text-orange-600 bg-orange-100 px-4 py-2 rounded-full uppercase tracking-widest">
+            <div class="space-y-6 md:ml-14  ml-1">
+                <span class=" text-xs font-bold text-orange-600 bg-orange-100 px-4 py-2 rounded-full uppercase tracking-widest">
                     Síguenos en redes
                 </span>
-                <h2 class="text-3xl md:text-4xl font-bold text-orange-900 italic leading-tight">
+                <h2 class="text-3xl md:text-4xl font-bold text-orange-900 italic leading-tight mt-3">
                     "Llevamos la Palabra a donde estés"
                 </h2>
                 <p class="text-lg text-gray-700 leading-relaxed">
@@ -101,29 +108,28 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
     </section>
 
                 <!-- Sección de Diezmos y Ofrendas (Ubicación final) -->
-            <section id="giving-section" class="giving-banner max-w-5xl mx-auto">
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div>
+            <section id="giving-section" class="giving-banner py-14 px-10 md:max-w-5xl items-center md:mx-auto mx-4">
+                <div class="grid lg:grid-cols-2 gap-16 items-center md:px-6  w-full">
+                    <div class="">
                         <h3 class="text-4xl md:text-5xl font-bold italic mb-6">Sé parte de la obra de Dios</h3>
                         <p class="text-lg text-orange-100/90 mb-8 leading-relaxed">
                             Diezmos y Ofrendas: Gracias por tu corazón generoso al cumplir la Gran Comisión junto a nosotros. Cada semilla que depositas hoy es una inversión en la transformación espiritual de nuestra nación.
                         </p>
                         <div class="flex items-center gap-4 text-orange-300 italic">
                             <i class="fas fa-heart text-2xl"></i>
-                            <p class="text-xl">"Dios ama al dador alegre."</p>
+                            <p class="text-xl">"Dios ama al dador alegre". 2 Corintios 9:7</p>
                         </div>
                     </div>
 
                     <div class="bank-details-glass">
                         <div class="flex flex-col items-center gap-1 mb-4">
                             <i class="fas fa-university text-2xl te xt-orange-400"></i>
-                            <h3 class="text-sm font-bold italic"> Iglesia de Jesucristo Venezuela</h3>
-                            <h4 class="text-sm  italic">Escanea el código!</h4>
-                            
+                            <h3 class="text-sm text-center font-bold italic"> Iglesia de Jesucristo Venezuela</h3>
+                            <h4 class="text-sm  italic">Escanea el código!</h4>    
                         </div>
                         <div class="space-y-5">
                             <div>
-                                <img src="QR.png" alt="Qr Code" class="w-38 mx-auto rounded-md">
+                                <img src="QR.png" alt="Qr Code" class="w-40 md:w-38 mx-auto rounded-md">
                             </div>
 
                             <div class="flex items-center gap-4 justify-center">
@@ -166,9 +172,7 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
             background-size: cover;
             background-position: center;
             border-radius: 50px;
-            padding: 60px;
             color: white;
-            margin-top: 6rem;
         }
         
 
@@ -177,7 +181,7 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 30px;
-            padding: 35px;
+            padding: 26px;
         }
       /*       background: linear-gradient(135deg, #a65d26 0%, #633314 100%); */
         
@@ -210,18 +214,29 @@ content: "";
     opacity: 0.05;
 }
 
+@media (max-width: 600px) {
+.bg-church-gradient::before {
+content: "";
+    position: absolute;
+    top: 30%; left: 0; right: -5%; bottom: 0;
+    
+    /* 1. Ponemos la imagen Y el mismo degradado (o un color base) */
+    background-image: url('logo--blanco.png'), 
+                      linear-gradient(135deg, #a65d26 0%, #633314 100%);
+    
+    background-size: 90%, cover;
+    background-repeat: no-repeat;
+    background-position: top right, center;
+
+    /* 2. LA MAGIA: Esto mezcla la imagen con el degradado del paso 1 */
+    background-blend-mode: soft-light; /* Prueba también con 'multiply' o 'luminosity' */
+    
+    /* 3. Ajuste fino de presencia */
+    opacity: 0.05;
+}
+}
 
 
-/*         .bg-logo::before{
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: url('logo--blanco.png') no-repeat right ;
-            background-size: contain;
-            background-blend-mode: saturation;
-            opacity: 0.1;
-            z-index: 1;
-        } */
     </style>
    
 

@@ -5,6 +5,8 @@ import Header from "../sections/Header.astro";
 import "../styles/global.css";
 
 
+import { ClientRouter } from 'astro:transitions';
+
 import { fixedTitle } from "@/consts/pageTitles";
 
 interface Props {
@@ -76,9 +78,12 @@ const {
       name="twitter:image"
       content="https://www.tus-acordes-cristianos.com/og-image.jpg"
     />
+        <ClientRouter />
   </head>
   <body>
+
     <Header />
+
     <main id="main">
       <slot />
     </main>
