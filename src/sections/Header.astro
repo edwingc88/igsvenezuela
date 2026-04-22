@@ -13,8 +13,6 @@
                     Contacto<i class="fas fa-address-book ml-2 text-white"></i>
                 </a>
             </div>
-
-            
             <div class="md:hidden flex items-center">
                 <button id="mobile-menu-button" class="text-orange-900 focus:outline-none hover:text-orange-800 hover:cursor-pointer">
                     <i class="fas fa-bars text-2xl"></i>
@@ -32,7 +30,7 @@
 </div>
 
 </nav>
-<script>
+<!-- <script>
     const btn = document.querySelector('#mobile-menu-button');
     const menu = document.querySelector('#mobile-menu');
 
@@ -41,5 +39,21 @@
         menu?.classList.toggle('hidden');
         menu?.classList.toggle('flex'); 
     });
+</script> -->
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const btn = document.querySelector('#mobile-menu-button');
+    const menu = document.querySelector('#mobile-menu');
+
+    if (btn && menu) {
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        menu.classList.toggle('flex');
+      });
+    }
+  });
 </script>
+
+
 

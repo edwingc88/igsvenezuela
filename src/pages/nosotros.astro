@@ -16,41 +16,65 @@ const canonical = 'https://www.infolavelada.com/'
             <!-- Pastores Banner Horizontal con Nombre Dentro -->
             <section class="mb-16">
                 <div class="pastor-banner-full">
-                    <img src="iglesia-gente.jpg" alt="iglesia banner">
-                    <div class="pastor-info-overlay ">
-                        <h4 class="text-4xl font-bold italic">Iglesia de Jesucristo de Venezuela</h4>
-     <p class="text-orange-200 text-sm tracking-widest uppercase mt-1 max-w-lg">
-    "Bajo la guía de los pastores Carlos y Carlida de Báez, somos una iglesia de  restauración familiar. Un lugar de esperanza, sanidad y nuevos comienzos para ti y los tuyos. 🛡️🙏"
-</p>
-
-                    </div>
-                </div>
-            </section>
-
-            <!-- Misión y Visión Contrastados -->
-            <section class="grid md:grid-cols-2 gap-8 mb-16">
-                <div class="card-mission p-10 rounded-[50px] shadow-xl hover:scale-[1.01] transition-transform">
-                    <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-800 text-2xl mb-6">
-                        <i class="fas fa-dove"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold text-orange-900 mb-4 italic">Nuestra Misión</h3>
-                    <p class="text-gray-600 leading-relaxed text-lg">
-                      Sostener y defender la verdad que es la palabra de Dios, cumpliendo con la gran comisión. Mateo 18:19
+                    <img src="pastoresedit.jpg" alt="iglesia pastores">
+                    <div class=" pastor-info-overlay flex flex-col items-end w-full ">
+                        <h3 class="text-2xl md:text-3xl font-bold italic text-right">Iglesia de Jesucristo de Venezuela "Gran Sabana"</h3>
+                         <h4 class="text-md md:text-2xl text-orange-400 font-bold italic text-right">Pastores: Carlos y Carlida de Báez</h4>
+                        <p class="text-right text-orange-200 text-sm md:text-md tracking-widest mt-1 max-w-lg items-end right-0">
+                        Somos una iglesia de restauración familiar; un lugar de esperanza, sanidad y nuevos comienzos para ti y los tuyos.
                     </p>
-                </div>
-                <div class="card-vision p-10 rounded-[50px] shadow-2xl hover:scale-[1.01] transition-transform">
-                    <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-white text-2xl mb-6">
-                        <i class="fas fa-eye"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-white mb-4 italic">Nuestra Visión</h3>
-                    <p class="text-orange-50/90 leading-relaxed text-lg">
-                        Ser una iglesia llena de Fe y del Espiritu Santo para restaurar y bendecir las familias de la tierra. Hechos 6:5
-                    </p>
                 </div>
             </section>
             <!-- Cita y Te Esperamos (Diseño Lateral Restaurado) -->
-            <section class="grid lg:grid-cols-2 gap-12 items-center mb-16 ">
-                <div class="biblical-badge-card p-9">
+            <section class="grid lg:grid-cols-2 gap-8 items-center mb-12 md:mb-32 position-relative h-full md:h-160  ">
+                   <!-- Misión y Visión Contrastados -->
+                <div class=" px-4 grid md:grid-cols-1 h-full row gap-5">
+                    <div class="card-mission p-9 rounded-[50px] shadow-xl hover:scale-[1.01] transition-transform h-auto">
+                        <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-800 text-2xl mb-6">
+                            <i class="fas fa-dove"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-orange-900 mb-4 italic">Nuestra Misión</h3>
+                        <p class="text-gray-600 leading-relaxed text-lg">
+                        Sostener y defender la verdad que es la palabra de Dios, cumpliendo con la gran comisión. Mateo 18:19
+                        </p>
+                    </div>
+                    <div class="card-vision p-9 rounded-[50px] shadow-2xl hover:scale-[1.01] transition-transform h-auto">
+                        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-white text-2xl mb-6">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-4 italic">Nuestra Visión</h3>
+                        <p class="text-orange-50/90 leading-relaxed text-lg">
+                            Ser una iglesia llena de Fe y del Espiritu Santo para restaurar y bendecir las familias de la tierra. Hechos 6:5
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-white py-4 px-4 md:px-4 rounded-[40px] shadow-sm border border-orange-50 h-full">
+                    <!-- Contenedor del Slider -->
+                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 no-scrollbar h-full">
+                        
+                        <!-- Imagen 1 -->
+                        <div class="min-w-full snap-center">
+                        <img src="grupo1.jpg" alt="Iglesia 1" class="w-full h-auto object-cover rounded-2xl">
+                        </div>
+
+                        <!-- Imagen 2 -->
+                        <div class="min-w-full snap-center">
+                        <img src="grupo2.jpg" alt="Iglesia 2" class="w-full h-auto object-cover rounded-2xl">
+                        </div>
+
+                        <!-- Imagen 3 -->
+                        <div class="min-w-full snap-center">
+                        <img src="grupo3.jpg" alt="Iglesia 3" class="w-full h-auto object-cover rounded-2xl">
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cita y Te Esperamos (Diseño Lateral Restaurado) -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center mb-16 mt-4  md:mt-10   h-full md:h-100 position-relative">
+                <div class="biblical-badge-card p-9 h-full justify-center ">
                     <i class="fas fa-quote-left text-5xl text-orange-300/20 mb-4 block"></i>
                     <p class="text-2xl md:text-3xl font-serif italic leading-relaxed">
                         "Hubiera yo desmayado, si no creyese que veré la bondad de Jehová en la tierra de los vivientes."
@@ -59,10 +83,9 @@ const canonical = 'https://www.infolavelada.com/'
                         <span class="text-orange-200 font-bold tracking-widest text-sm uppercase">Salmos 27:13</span>
                     </div>
                 </div>
-
-                <div class="bg-white py-12 px-10 rounded-[40px] shadow-sm border border-orange-50">
-                    <h5 class="text-3xl font-bold text-orange-900 mb-6 italic">¡Te esperamos con amor!</h5>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                <div class="bg-white p-10 rounded-[50px] shadow-2xl h-full justify-center content-center">
+                    <h5 class="text-3xl font-bold text-orange-900 mb-3 italic">¡Te esperamos con amor!</h5>
+                    <p class="text-gray-600 text-md leading-relaxed mb-5">
                         Nuestra puerta y nuestro corazón están abiertos para ti. Creemos que cada persona es un tesoro para Dios. Ven a compartir una palabra de vida y una comunidad que te apoya.
                     </p>
                     <button onclick="window.scrollTo(0,document.body.scrollHeight)" class="btn-church md:px-8 px-5 py-4 rounded-2xl font-bold flex items-center md:gap-3 gap-1 text-md  md:text-lg cursor-pointer">
@@ -70,7 +93,6 @@ const canonical = 'https://www.infolavelada.com/'
                     </button>
                 </div>
             </section>
-
         </div>
     </main>
 
@@ -96,7 +118,7 @@ const canonical = 'https://www.infolavelada.com/'
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(26, 16, 1, 0.918) 0%, #4a271075 35% , transparent 100%);
+            background: linear-gradient(to top, rgba(26, 16, 1, 0.918) 0%, #4a2710d2 16% , transparent 100%);
             z-index: 1;
         }
 

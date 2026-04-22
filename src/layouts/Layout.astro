@@ -18,7 +18,7 @@ interface Props {
 
 const {
   title = fixedTitle,
-  description = "Evento de boxeo aficionado entre streamers y creadores de contenido, organizado por Ibai Llanos",
+  description = "Caminamos juntos en fe y amor. Si buscas una congregación, apoyo en oración o una familia espiritual en Venezuela, nuestras puertas están abiertas para ti. ¡Ven a conocernos!",
   canonical,
   robots,
 } = Astro.props;
@@ -29,12 +29,12 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/onlylogo.png" />
-    <link rel="icon" href="/onlylogo.png" />
+    <link rel="icon" type="image/svg+xml" href="/logo--blanco.png" />
+    <link rel="icon" href="/logo--blanco.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Ibai Llanos" />
+    <meta name="author" content="Edwin M" />
     <meta
       name="theme-color"
       content="#0a1024"
@@ -52,31 +52,31 @@ const {
     {canonical && <link rel="canonical" href={canonical} />}
     {robots && <meta name="robots" content={robots} />}
 
-    <meta property="og:url" content="https://www.tus-acordes-cristianos.com" />
+    <meta property="og:url" content="https://igsvenezuela.vercel.app/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta
       property="og:image"
-      content="https://www.tus-acordes-cristianos.com/og-image.jpg"
+      content="https://igsvenezuela.vercel.app/pagina-iglesia-capture.png"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Tus Acordes Cristianos — Alabanza y Acción de Gracias"
+      content="Iglesia de Jesucristo Venezuela - Gran Sabana"
     />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:site_name" content="Tus Acordes Cristianos" />
+    <meta property="og:site_name" content="Iglesia de Jesucristo Venezuela" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@tusacordescristianos" />
+    <meta name="twitter:site" content="@igsvenezuela" />
     <meta name="twitter:creator" content="@tu_usuario" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta
       name="twitter:image"
-      content="https://www.tus-acordes-cristianos.com/og-image.jpg"
+      content="https://igsvenezuela.vercel.app/pagina-iglesia-capture.png"
     />
         <ClientRouter />
   </head>
