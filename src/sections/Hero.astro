@@ -230,33 +230,33 @@ content: "";
     top: -15%; left: 0; right: -5%; bottom: 0;
     
     /* 1. Ponemos la imagen Y el mismo degradado (o un color base) */
-    background-image: url('logo--blanco.png'), 
+    background-image: url('casa-horizontal.jpg'), 
                       linear-gradient(135deg, #a65d26 0%, #633314 100%);
     
-    background-size: 45%, cover;
+    background-size: 100%, cover;
     background-repeat: no-repeat;
-    background-position: top right, center;
+    background-position: top center, center;
 
     /* 2. LA MAGIA: Esto mezcla la imagen con el degradado del paso 1 */
     background-blend-mode: soft-light; /* Prueba también con 'multiply' o 'luminosity' */
     
     /* 3. Ajuste fino de presencia */
-    opacity: 0.05;
+    opacity: 0.06;
 }
 
 @media (max-width: 600px) {
 .bg-church-gradient::before {
 content: "";
     position: absolute;
-    top: 30%; left: 0; right: -5%; bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     
     /* 1. Ponemos la imagen Y el mismo degradado (o un color base) */
-    background-image: url('logo--blanco.png'), 
+    background-image: url('casa.jpg'), 
                       linear-gradient(135deg, #a65d26 0%, #633314 100%);
     
-    background-size: 90%, cover;
+    background-size: 100%, cover;
     background-repeat: no-repeat;
-    background-position: top right, center;
+    background-position: center center, center;
 
     /* 2. LA MAGIA: Esto mezcla la imagen con el degradado del paso 1 */
     background-blend-mode: soft-light; /* Prueba también con 'multiply' o 'luminosity' */
