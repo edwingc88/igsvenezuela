@@ -31,12 +31,12 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
         <section class="pastor-section py-12 px-6 border-y border-orange-100">
             <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
                 <div class="relative">
-                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-orange-100 rounded-full -z-10"></div>
+                <div class="absolute -top-4 -left-4 w-24 h-24 bg-orange-100 rounded-full -z-10"></div>
                 
-         <img src="carlos-carlida.jpg" class="rounded-3xl shadow-2xl border-4 border-white transform -rotate-2 hover:rotate-0 transition duration-500 max-w-sm md:max-w-md w-full ml-auto">
+                   <img src="carlos-carlida.jpg" class="rounded-3xl shadow-2xl border-4 border-white transform -rotate-2 hover:rotate-0 transition duration-500 max-w-sm md:max-w-md w-full ml-auto">
 
-           <div class="absolute bottom-6 right-6 bg-white px-6 py-2 rounded-full shadow-lg border border-orange-50">
-                        <p class="text-orange-900 font-bold italic">Pr. Carlos y Carlida de Baez</p>
+                   <div class="absolute bottom-6 right-6 bg-white px-6 py-2 rounded-full shadow-lg border border-orange-50">
+                            <p class="text-orange-900 font-bold italic">Pr. Carlos y Carlida de Baez</p>
                     </div>
                 </div>
                 <div class="space-y-6">
@@ -56,6 +56,90 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
                 </div>
             </div>
         </section>
+
+
+
+        <!-- Formulario de Galería de Fotos -->
+        <section id="seccion-subir" class="py-20 px-6 bg-linear-to-b from-orange-50/50 to-bg-orange-100 ">
+            <div class="max-w-5xl mx-auto">
+
+                <div class="mx-auto grid md:grid-cols-2 gap-2 items-center">
+
+                  <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-orange-900 italic">¿Quienes Somos?</h2>
+
+                              <p class="text-lg text-gray-700 leading-relaxed pt-4">
+                Somos, ante todo, una familia de fe unida por el amor de Dios y el deseo de servirle.  Creemos que no fuimos llamados a caminar solos, sino a ser una comunidad donde cada persona cuenta.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed pt-4">
+                         Queremos invitarte a conocer nuestra historia, nuestra mision y la visión que nos impulsa a ser un refugio de fe para cada familia en Venezuela.
+                    </p>
+
+ 
+        
+                    <div class="pt-4">
+                        <button onclick="showPage('contacto')" class="inline-flex items-center space-x-3 text-orange-800 font-bold text-xl hover:text-orange-600 transition">
+                            <span>Saber más de nosotros</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                  </div>
+
+                          <img src="foto-palabra-3.jpg" class="rounded-3xl shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition duration-500 max-w-sm md:max-w-md  mt-6 md:mt-0 w-full ml-auto">
+
+      <!--             <div class="rotate-2 hover:rotate-0 transition duration-500 w-full "    >
+                    <img src="foto-palabra-3.jpg" alt="Galería de Fotos" class="rounded-3xl shadow-2xl border-4 border-white w-3xl   ">
+                  </div> -->
+
+                </div>
+            </div>
+        </section>
+
+
+
+                <!-- Sección de Diezmos y Ofrendas (Ubicación final) -->
+            <section id="giving-section" class="giving-banner py-14 px-10 md:max-w-5xl items-center md:mx-auto mx-4">
+                <div class="grid lg:grid-cols-2 gap-16 items-center md:px-6  w-full">
+                    <div class="">
+                        <h3 class="text-4xl md:text-5xl font-bold italic mb-6">Sé parte de la obra de Dios</h3>
+                        <p class="text-lg text-orange-100/90 mb-8 leading-relaxed">
+                            Diezmos y Ofrendas: Gracias por tu corazón generoso al cumplir la Gran Comisión junto a nosotros. Cada semilla que depositas hoy es una inversión en la transformación espiritual de nuestra nación.
+                        </p>
+                        <div class="flex items-center gap-4 text-orange-300 italic">
+                            <i class="fas fa-heart text-2xl"></i>
+                            <p class="text-xl">"Dios ama al dador alegre". 2 Corintios 9:7</p>
+                        </div>
+                    </div>
+
+                    <div class="bank-details-glass">
+                        <div class="flex flex-col items-center gap-1 mb-4">
+                            <i class="fas fa-university text-2xl te xt-orange-400"></i>
+                            <h3 class="text-sm text-center font-bold italic"> Iglesia de Jesucristo Venezuela</h3>
+                            <h4 class="text-sm  italic">Escanea el código!</h4>    
+                        </div>
+                        <div class="space-y-5">
+                            <div>
+                                <img src="QR.png" alt="Qr Code" class="w-40 md:w-38 mx-auto rounded-md">
+                            </div>
+
+                            <div class="flex items-center gap-4 justify-center">
+                                <img src="bnc-logo.png" alt="bnc logo" class="w-10 ">
+                                <div class="flex flex-col justify-center align-middle border-l border-white/20 pl-2">
+            
+                                    <p class="text-xs tracking-tight uppercase opacity-60">Banco Nacional de Credito</p>
+                                    <p class="text-md font-medium ">Nuestro Pago Movil</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            
+
+
         
         <!-- Sección Video + Mensaje -->
      <section class="py-20 px-6 bg-orange-50/50">
@@ -106,59 +190,6 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
         </div>
     </section>
 
-                <!-- Sección de Diezmos y Ofrendas (Ubicación final) -->
-            <section id="giving-section" class="giving-banner py-14 px-10 md:max-w-5xl items-center md:mx-auto mx-4">
-                <div class="grid lg:grid-cols-2 gap-16 items-center md:px-6  w-full">
-                    <div class="">
-                        <h3 class="text-4xl md:text-5xl font-bold italic mb-6">Sé parte de la obra de Dios</h3>
-                        <p class="text-lg text-orange-100/90 mb-8 leading-relaxed">
-                            Diezmos y Ofrendas: Gracias por tu corazón generoso al cumplir la Gran Comisión junto a nosotros. Cada semilla que depositas hoy es una inversión en la transformación espiritual de nuestra nación.
-                        </p>
-                        <div class="flex items-center gap-4 text-orange-300 italic">
-                            <i class="fas fa-heart text-2xl"></i>
-                            <p class="text-xl">"Dios ama al dador alegre". 2 Corintios 9:7</p>
-                        </div>
-                    </div>
-
-                    <div class="bank-details-glass">
-                        <div class="flex flex-col items-center gap-1 mb-4">
-                            <i class="fas fa-university text-2xl te xt-orange-400"></i>
-                            <h3 class="text-sm text-center font-bold italic"> Iglesia de Jesucristo Venezuela</h3>
-                            <h4 class="text-sm  italic">Escanea el código!</h4>    
-                        </div>
-                        <div class="space-y-5">
-                            <div>
-                                <img src="QR.png" alt="Qr Code" class="w-40 md:w-38 mx-auto rounded-md">
-                            </div>
-
-                            <div class="flex items-center gap-4 justify-center">
-                                <img src="bnc-logo.png" alt="bnc logo" class="w-10 ">
-                                <div class="flex flex-col justify-center align-middle border-l border-white/20 pl-2">
-            
-                                    <p class="text-xs tracking-tight uppercase opacity-60">Banco Nacional de Credito</p>
-                                    <p class="text-md font-medium ">Nuestro Pago Movil</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-        <!-- Formulario de Galería de Fotos -->
-        <section id="seccion-subir" class="py-20 px-6 bg-linear-to-b from-orange-50/50 to-bg-orange-100 ">
-            <div class="max-w-3xl mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-orange-900 mb-4 uppercase tracking-wider">Muro de Recuerdos</h2>
-                    <p class="text-gray-600 italic">Comparte una galería de fotos de nuestros momentos especiales juntos.</p>
-                </div>
-
-                <div class="bg-white p-8 md:p-10 rounded-3xl card-shadow border border-orange-50">
-                    <FormularioGaleria />
-                </div>
-            </div>
-        </section>
 
 
     </main>

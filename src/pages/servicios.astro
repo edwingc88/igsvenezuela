@@ -91,6 +91,30 @@ const canonical = 'https://www.infolavelada.com/'
             </div>
 
 
+ <!-- Cita y Te Esperamos (Diseño Lateral Restaurado) -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center mb-16 mt-4  md:mt-10   h-full md:h-100 position-relative">
+                <div class="biblical-badge-card p-9 h-full justify-center ">
+                    <i class="fas fa-quote-left text-5xl text-orange-300/20 mb-4 block"></i>
+                    <p class="text-2xl md:text-3xl font-serif italic leading-relaxed">
+                        "Hubiera yo desmayado, si no creyese que veré la bondad de Jehová en la tierra de los vivientes."
+                    </p>
+                    <div class="mt-8 flex items-center justify-end">
+                        <span class="text-orange-200 font-bold tracking-widest text-sm uppercase">Salmos 27:13</span>
+                    </div>
+                </div>
+                <div class="bg-white p-10 rounded-[50px] shadow-2xl h-full justify-center content-center">
+                    <h5 class="text-3xl font-bold text-orange-900 mb-3 italic">¡Te esperamos con amor!</h5>
+                    <p class="text-gray-600 text-md leading-relaxed mb-5">
+                        Nuestra puerta y nuestro corazón están abiertos para ti. Creemos que cada persona es un tesoro para Dios. Ven a compartir una palabra de vida y una comunidad que te apoya.
+                    </p>
+                    <button onclick="window.scrollTo(0,document.body.scrollHeight)" class="btn-church md:px-8 px-5 py-4 rounded-2xl font-bold flex items-center md:gap-3 gap-1 text-md  md:text-lg cursor-pointer">
+                        <i class="fas fa-map-marker-alt"></i> Sabes cómo llegar ?
+                    </button>
+                </div>
+            </section>
+
+
+
         </div>
     </main>
     <style>
@@ -147,7 +171,7 @@ const canonical = 'https://www.infolavelada.com/'
         }
 
         .special-event-banner {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=1200');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('mano-izquierda.jpg');
             background-size: cover;
             background-position: center;
             border-radius: 50px;
@@ -159,6 +183,16 @@ const canonical = 'https://www.infolavelada.com/'
             gap: 4em;
             color: white;
             box-shadow: 0 30px 60px -15px rgba(0,0,0,0.3);
+        }
+
+
+        
+        .biblical-badge-card {
+            background: linear-gradient(135deg, #8c4b1d 0%, #4a2710 100%);
+            color: white;
+            border-radius: 35px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(74, 39, 16, 0.2);
         }
     </style>
 </Layout>

@@ -12,22 +12,40 @@ const canonical = 'https://www.infolavelada.com/'
  <!-- PÁGINA: NOSOTROS -->
     <main id="page-nosotros" class="page-content  py-4 px-6">
         <div class="max-w-6xl mx-auto">
-            
-            <!-- Pastores Banner Horizontal con Nombre Dentro -->
-            <section class="mb-16">
-                <div class="pastor-banner-full">
-                    <img src="pastoresedit.jpg" alt="iglesia pastores">
-                    <div class=" pastor-info-overlay flex flex-col items-end w-full ">
-                        <h3 class="text-2xl md:text-3xl font-bold italic text-right">Iglesia de Jesucristo de Venezuela "Gran Sabana"</h3>
-                         <h4 class="text-md md:text-2xl text-orange-400 font-bold italic text-right">Pastores: Carlos y Carlida de Báez</h4>
-                        <p class="text-right text-orange-200 text-sm md:text-md tracking-widest mt-1 max-w-lg items-end right-0">
-                        Somos una iglesia de restauración familiar; un lugar de esperanza, sanidad y nuevos comienzos para ti y los tuyos.
-                    </p>
+
+                            <!-- Banner de Evento Especial -->
+            <div class="special-event-banner p-8 mb-10 ">
+                <div class="max-w-full md:max-w-1/2">
+                    <span class="bg-orange-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4 inline-block">GRAN SABANA</span>
+                    <h3 class="text-3xl md:text-5xl font-bold italic mb-4">IGLESIA DE JESUCRISTO VENEZUELA</h3>
+                    <p class="text-xl text-orange-50/90 mb-2"> Bajo el liderazgo de los pastores Carlos y Cálida de Báez, somos una iglesia de restauración familiar; un lugar de esperanza, sanidad y nuevos comienzos para ti y los tuyos. </p>                 
+                    <p class="text-xl text-orange-50/90 mb-8"> Nacimos bajo una poderosa palabra de Dios que nos llamó a fundar esta casa, creyendo firmemente en la promesa de seguir expandiéndonos y ensancharnos a derecha e izquierda</p>
+                  
+                    <div class="flex flex-wrap  gap-6 text-sm font-bold uppercase tracking-tighter">
+                        <div class="bg-white/10 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/20">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Core 8 - Mz1#1
+                        </div>
                     </div>
                 </div>
-            </section>
+                <div class="max-w-full md:max-w-1/2 ">
+                    <div class="relative">
+                 <img class="w-80 rounded-2xl border-2 border-orange-50 " src="family.jpg" alt="manos que bendicen" />
+                                <div class="absolute bottom-5 left-5 bg-white px-6 py-2 rounded-full shadow-lg border border-orange-50">
+                            <p class="text-orange-900 font-bold italic">Familia Pastoral</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+           
+
+            
+            <!-- Pastores Banner Horizontal con Nombre Dentro -->
+
             <!-- Cita y Te Esperamos (Diseño Lateral Restaurado) -->
-            <section class="grid lg:grid-cols-2 gap-8 items-center mb-12 md:mb-32 position-relative h-full md:h-160  ">
+            <section class="grid lg:grid-cols-2 gap-8 items-center mb-10 md:mb-18 position-relative h-full ">
                    <!-- Misión y Visión Contrastados -->
                 <div class=" px-4 grid md:grid-cols-1 h-full row gap-5">
                     <div class="card-mission p-9 rounded-[50px] shadow-xl hover:scale-[1.01] transition-transform h-auto">
@@ -50,55 +68,39 @@ const canonical = 'https://www.infolavelada.com/'
                     </div>
                 </div>
                 <div class="bg-white py-4 px-4 md:px-4 relative rounded-[40px] shadow-sm border border-orange-50 h-full">
-                    <!-- Contenedor del Slider -->
-                    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 no-scrollbar h-full">
-                        
-                        <!-- Imagen 1 -->
-                        <div class="min-w-full snap-center">
-                        <img src="grupo1.jpg" alt="Iglesia 1" class="w-full h-auto object-cover rounded-2xl">
-                        </div>
-
-                        <!-- Imagen 2 -->
-                        <div class="min-w-full snap-center">
-                        <img src="grupo2.jpg" alt="Iglesia 2" class="w-full h-auto object-cover rounded-2xl">
-                        </div>
-
-                        <!-- Imagen 3 -->
-                        <div class="min-w-full snap-center">
-                        <img src="grupo3.jpg" alt="Iglesia 3" class="w-full h-auto object-cover rounded-2xl">
-                        </div>
-
-                    </div>
-<!-- Debajo del div del slider -->
-<div class="flex justify-center gap-2 absolute bottom-4 left-1/2 transform -translate-x-1/2">
-    <div class="w-2 h-2 rounded-full bg-orange-400"></div>
-    <div class="w-2 h-2 rounded-full bg-orange-100"></div>
-    <div class="w-2 h-2 rounded-full bg-orange-100"></div>
-</div>
+                  <!-- Imagen 1 -->
+                    <div class="min-w-full snap-center relative">
+                        <img src="foto-palabra-4.jpg" alt="Iglesia 1" class="w-full h-auto object-cover rounded-2xl">
+                    </div>  
                 </div>
             </section>
 
             <!-- Cita y Te Esperamos (Diseño Lateral Restaurado) -->
-            <section class="grid lg:grid-cols-2 gap-12 items-center mb-16 mt-4  md:mt-10   h-full md:h-100 position-relative">
-                <div class="biblical-badge-card p-9 h-full justify-center ">
-                    <i class="fas fa-quote-left text-5xl text-orange-300/20 mb-4 block"></i>
-                    <p class="text-2xl md:text-3xl font-serif italic leading-relaxed">
-                        "Hubiera yo desmayado, si no creyese que veré la bondad de Jehová en la tierra de los vivientes."
-                    </p>
-                    <div class="mt-8 flex items-center justify-end">
-                        <span class="text-orange-200 font-bold tracking-widest text-sm uppercase">Salmos 27:13</span>
-                    </div>
-                </div>
-                <div class="bg-white p-10 rounded-[50px] shadow-2xl h-full justify-center content-center">
-                    <h5 class="text-3xl font-bold text-orange-900 mb-3 italic">¡Te esperamos con amor!</h5>
-                    <p class="text-gray-600 text-md leading-relaxed mb-5">
-                        Nuestra puerta y nuestro corazón están abiertos para ti. Creemos que cada persona es un tesoro para Dios. Ven a compartir una palabra de vida y una comunidad que te apoya.
-                    </p>
-                    <button onclick="window.scrollTo(0,document.body.scrollHeight)" class="btn-church md:px-8 px-5 py-4 rounded-2xl font-bold flex items-center md:gap-3 gap-1 text-md  md:text-lg cursor-pointer">
-                        <i class="fas fa-map-marker-alt"></i> Sabes cómo llegar ?
-                    </button>
-                </div>
-            </section>
+
+              <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-orange-900 mb-4 uppercase tracking-wider">EQUIPO MINISTERIAL</h2>
+                    <p class="text-gray-600 italic"> Hombres y mujeres comprometidos con darle lo mejor a Dios.</p>
+              </div> 
+         <section class="grid lg:grid-cols-3 gap-8 items-center mb-12 md:mb-32 position-relative h-full   ">    
+                 <div class="bg-white py-3 px-3 md:px-3 relative rounded-[40px] shadow-sm border border-orange-50 h-full">
+                        <!-- Imagen 1 -->
+                        <div class="min-w-full snap-center">
+                        <img src="grupo1.jpg" alt="Iglesia 1" class="w-full h-auto object-cover rounded-3xl">                     
+                        </div>
+                 </div>
+                                  <div class="bg-white py-3 px-3 md:px-3 relative rounded-[40px] shadow-sm border border-orange-50 h-full">
+                        <!-- Imagen 1 -->
+                        <div class="min-w-full snap-center">
+                        <img src="grupo2.jpg" alt="Iglesia 1" class="w-full h-auto object-cover rounded-3xl">                     
+                        </div>
+                 </div>
+                                  <div class="bg-white py-3 px-3 md:px-3 relative rounded-[40px] shadow-sm border border-orange-50 h-full">
+                        <!-- Imagen 1 -->
+                        <div class="min-w-full snap-center">
+                        <img src="grupo3.jpg" alt="Iglesia 1" class="w-full h-auto object-cover rounded-3xl">                     
+                        </div>
+                 </div>
+         </section>
         </div>
     </main>
 
@@ -130,10 +132,10 @@ const canonical = 'https://www.infolavelada.com/'
 
         .pastor-info-overlay {
             position: absolute;
-            bottom: 0;
+            top: 40%;
             left: 0;
             right: 0;
-            padding: 60px 40px 30px;
+            padding: 30px 40px 30px;
  /*            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); */
             color: white;
             z-index: 100;
@@ -157,6 +159,22 @@ const canonical = 'https://www.infolavelada.com/'
         .card-vision {
             background: #8c4b1d;
             color: #fdfaf6;
+        }
+
+
+              .special-event-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=1200');
+            background-size: cover;
+            background-position: center;
+            border-radius: 50px;
+            min-height: 450px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 4em;
+            color: white;
+            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.3);
         }
     </style>
 
