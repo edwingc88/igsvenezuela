@@ -19,6 +19,11 @@
   }
 }
 
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(138, 58, 6)transparent;
+  }
+
 
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
