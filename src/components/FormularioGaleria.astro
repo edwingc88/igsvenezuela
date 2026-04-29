@@ -52,6 +52,8 @@
 
 <script>
 // @ts-nocheck
+
+function initFormularioGaleria() {
 // Script para manejar el formulario, preview y modal (si existe)
 const modal = document.querySelector('#uploadModal');
 
@@ -69,25 +71,27 @@ document.querySelector('#btn-subir-fotos')?.addEventListener('click', (e) => {
 document.querySelector('#btn-cerrar-modal')?.addEventListener('click', closeModal);
 
 // --- PREVIEW MODAL ---
-const dropArea = document.querySelector('#drop-area');
-const fileInput = document.querySelector('#foto');
-const previewGrid = document.querySelector('#modal-preview-grid');
-const previewInfo = document.querySelector('#modal-preview-info');
-let selectedFiles = [];
+const dropArea = document.querySelector('#drop-area') as HTMLElement | null;
+const fileInput = document.querySelector('#foto') as HTMLInputElement | null;
+const previewGrid = document.querySelector('#modal-preview-grid') as HTMLElement | null;
+const previewInfo = document.querySelector('#modal-preview-info') as HTMLElement | null;
+let selectedFiles: File[] = [];
 
 dropArea?.addEventListener('click', () => fileInput?.click());
 
-fileInput?.addEventListener('change', function() {
-    selectedFiles = Array.from(this.files ?? []);
+fileInput?.addEventListener('change', () => {
+    selectedFiles = fileInput.files ? Array.from(fileInput.files) : [];
     if (!previewGrid) return;
     previewGrid.innerHTML = '';
     if (selectedFiles.length > 0) {
         previewInfo?.classList.add('hidden');
-        selectedFiles.forEach(file => {
+        selectedFiles.forEach((file) => {
             const reader = new FileReader();
-            reader.onload = (e) => {
+            reader.onload = (ev) => {
+                const result = ev.target?.result;
+                if (typeof result !== 'string') return;
                 const img = document.createElement('img');
-                img.src = e.target.result;
+                img.src = result;
                 img.className = 'preview-thumb';
                 img.alt = file.name;
                 previewGrid.appendChild(img);
@@ -98,30 +102,39 @@ fileInput?.addEventListener('change', function() {
 });
 
 // --- SUBMIT ---
-document.querySelector('#churchForm')?.addEventListener('submit', (e) => {
+document.querySelector('#churchForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (selectedFiles.length === 0) return alert('Selecciona fotos.');
 
-    const nombre = document.querySelector('#nombre')?.value ?? '';
-    const titulo = document.querySelector('#titulo')?.value ?? '';
-    const cat = document.querySelector('#categoria')?.value ?? '';
+    const autor = (document.querySelector('#nombre') as HTMLInputElement | null)?.value ?? '';
+    const titulo = (document.querySelector('#titulo') as HTMLInputElement | null)?.value ?? '';
+    const categoria = (document.querySelector('#categoria') as HTMLSelectElement | null)?.value ?? '';
 
-    if (typeof galerias !== 'undefined') {
-        galerias.unshift({
-            id: Date.now(),
-            autor: nombre,
-            categoria: cat,
-            categoriaColor: 'text-orange-600 bg-orange-50',
-            titulo,
-            fecha: 'Recién publicado',
-            imagenes: selectedFiles.map(f => URL.createObjectURL(f))
-        });
+    const fd = new FormData();
+    fd.append('autor', autor);
+    fd.append('titulo', titulo);
+    fd.append('categoria', categoria);
+    selectedFiles.forEach((f) => fd.append('files', f));
 
-        if (typeof renderGalerias === 'function') {
-            renderGalerias();
+    try {
+        const res = await fetch('/api/upload', { method: 'POST', body: fd });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            console.error('[Upload] Error', json);
+            alert(json?.error ?? 'Error subiendo galería.');
+            return;
         }
-    }
 
-    closeModal();
+        window.dispatchEvent(new CustomEvent('galeria:created', { detail: json?.galeria }));
+        closeModal();
+    } catch (err) {
+        console.error('[Upload] Falló', err);
+        alert('Error subiendo galería.');
+    }
 });
+
+}
+document.addEventListener('astro:page-load', initFormularioGaleria);
+
+
 </script>

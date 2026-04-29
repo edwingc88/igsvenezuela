@@ -13,7 +13,8 @@ export default defineConfig({
       CLOUDINARY_CLOUD_NAME: envField.string({ context: 'server', access: 'secret' }),
       CLOUDINARY_API_KEY: envField.string({ context: 'server', access: 'secret' }),
       CLOUDINARY_API_SECRET: envField.string({ context: 'server', access: 'secret' }),
-      // Puedes añadir SUPABASE_URL y SUPABASE_ANON_KEY aquí también si quieres
+      SUPABASE_URL: envField.string({ context: 'server', access: 'secret' }),
+      SUPABASE_SERVICE_ROLE_KEY: envField.string({ context: 'server', access: 'secret' }),
     }
   },
 

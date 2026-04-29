@@ -58,27 +58,111 @@ const galerias = await getGalerias();
     .internal-bento {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: 110px;
+        grid-auto-rows: 140px;
         gap: 6px;
         width: 100%;
         border-radius: 12px;
         overflow: hidden;
     }
-    .internal-bento img {
+    /* En modo bento, NO recortamos: mostramos completa y rellenamos con fondo. */
+    .internal-bento { background: rgba(29, 26, 25, 0.041); }
+
+/* Cuando la pantalla sea menor a 600px (puedes ajustar este valor) */
+@media (max-width: 600px) {
+    .internal-bento {
+        grid-template-columns: 1fr; /* Una sola columna */
+        grid-auto-rows: auto;      /* Opcional: permite que las celdas crezcan según su contenido */
+    }
+}
+
+    .img-download-wrap {
+        position: relative;
         width: 100%;
         height: 100%;
-        object-fit: cover;
         border-radius: 6px;
-        transition: transform 0.3s;
+        overflow: hidden;
+        background:
+          radial-gradient(700px 220px at 50% 35%, rgba(255, 255, 255, 0.055), rgba(5, 8, 17, 0) 60%),
+          rgba(2, 3, 7, 0.829);
+    }
+    .img-download-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* completa, sin recorte */
+        transition: transform 0.25s ease;
         display: block;
     }
-    .internal-bento img:hover { transform: scale(1.03); }
+    .img-download-wrap:hover img { transform: scale(1.01); }
+    .img-download-btn {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(6px);
+        text-decoration: none;
+        opacity: 0;
+        transform: translateY(-2px);
+        transition: opacity 160ms ease, transform 160ms ease, background 160ms ease;
+        z-index: 5;
+    }
+    .img-download-wrap:hover .img-download-btn,
+    .swiper-slide:hover .img-download-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .img-download-btn:hover {
+        background: rgba(0, 0, 0, 0.5);
+    }
 
     .view-slider { width: 100%; display: block; }
-    .swiper { width: 100% !important; height: 420px; border-radius: 16px; overflow: hidden; }
+    .swiper {
+        width: 100% !important;
+        height: auto;
+        min-height: 360px;
+        max-height: min(72vh, 560px);
+        border-radius: 16px;
+        overflow: hidden;
+        /* Swiper usa estas variables (default azul). Forzamos blanco. */
+        --swiper-theme-color: rgba(255, 255, 255, 0.92);
+        --swiper-navigation-color: rgba(255, 255, 255, 0.92);
+    }
     .swiper-wrapper { width: 100% !important; }
-    .swiper-slide { width: 100% !important; height: 100%; }
-    .swiper-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .swiper-slide {
+        width: 100% !important;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        background:
+          radial-gradient(1200px 500px at 50% 40%, rgba(255,255,255,0.06), rgba(10,16,36,0.0) 60%),
+          rgba(10, 16, 36, 0.22);
+    }
+    .swiper-slide .img-download-wrap {
+        width: 100%;
+        height: 100%;
+        min-height: 420px;
+        max-height: min(78vh, 640px);
+        position: relative;
+    }
+    .swiper-slide .img-download-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* igual que bento: completa sin recorte */
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 
     .swiper-button-next,
     .swiper-button-prev {
@@ -88,20 +172,24 @@ const galerias = await getGalerias();
         width: 44px;
         height: 44px;
         border-radius: 9999px;
-        background: rgba(248, 113, 20, 0.95);
-        color: white;
+        background: rgba(10, 16, 36, 0.55);
+        color: rgba(255, 255, 255, 0.92) !important;
         z-index: 20;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: background 160ms ease, transform 160ms ease, opacity 160ms ease;
     }
     .swiper-button-next { right: 12px; }
     .swiper-button-prev { left: 12px; }
     .swiper-button-next:hover,
     .swiper-button-prev:hover {
-        background: rgba(255, 159, 67, 0.95);
+        background: rgba(10, 16, 36, 0.72);
+        transform: translateY(-50%) scale(1.03);
     }
     .swiper-button-next::after,
     .swiper-button-prev::after {
@@ -109,10 +197,20 @@ const galerias = await getGalerias();
     }
 
     .swiper-navigation-icon-text {
-        font-size: 18px;
-        font-weight: 700;
-        line-height: 1;
+        width: 18px;
+        height: 18px;
         pointer-events: none;
+        display: block;
+    }
+    .swiper-navigation-icon-text svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
     }
 
     .modal-overlay {
@@ -135,13 +233,13 @@ import Swiper from 'swiper';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-
-let galerias = JSON.parse(
-    document.getElementById('galeria-data').textContent
-);
-
 const swiperInstances = new Map();
-
+let galerias = [];
+function toCloudinaryDownloadUrl(src) {
+    // Fuerza descarga del original vía "fl_attachment" (sin transformaciones).
+    // Ej: .../image/upload/...  -> .../image/upload/fl_attachment/...
+    return typeof src === 'string' ? src.replace('/upload/', '/upload/fl_attachment/') : src;
+}
 function renderGalerias() {
     const container = document.querySelector('#posts-container');
     if (!container) return;
@@ -152,12 +250,9 @@ function renderGalerias() {
                 <div>
                     <span class="text-[10px] font-bold ${g.categoriaColor} px-3 py-1 rounded-full uppercase tracking-widest">${g.categoria}</span>
                     <h3 class="text-2xl font-bold text-orange-900 mt-2">${g.titulo}</h3>
-                    <p class="text-sm text-gray-400 mt-1">Publicado por <b>${g.autor}</b> • ${g.fecha}</p>
+                    <p class="text-sm text-orange-800/70 mt-1">Publicado por <b>${g.autor}</b> • ${g.fecha}</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button class="btn-download text-xs font-bold px-4 py-2 rounded-xl border border-orange-200 text-orange-800 hover:bg-orange-50 transition cursor-pointer">
-                        ⬇ Descargar todo
-                    </button>
                     <div class="flex bg-gray-100 p-1 rounded-xl">
                         <button data-view="bento" class="btn-toggle px-4 py-2 rounded-lg text-xs font-bold transition bg-white shadow-sm text-orange-900 hover:bg-gray-200 cursor-pointer">Bento</button>
                         <button data-view="slider" class="btn-toggle px-4 py-2 rounded-lg text-xs font-bold transition text-gray-500 hover:bg-gray-200 cursor-pointer">Slider</button>
@@ -166,18 +261,38 @@ function renderGalerias() {
             </div>
             <div class="gallery-content">
                 <div class="view-bento internal-bento">
-                    ${g.imagenes.map((src, i) => `<img src="${src}" alt="foto ${i + 1}">`).join('')}
+                    ${g.imagenes.map((src, i) => `
+                        <div class="img-download-wrap" data-idx="${i}">
+                            <img src="${src}" alt="foto ${i + 1}">
+                            <a class="img-download-btn" href="${toCloudinaryDownloadUrl(src)}" target="_blank" rel="noopener" aria-label="Descargar imagen ${i + 1}">
+                                ⬇
+                            </a>
+                        </div>
+                    `).join('')}
                 </div>
                 <div class="view-slider" style="display:none">
                     <div class="swiper" id="swiper-${g.id}">
                         <div class="swiper-wrapper">
-                            ${g.imagenes.map((src, i) => `<div class="swiper-slide"><img src="${src}" alt="foto ${i + 1}"></div>`).join('')}
+                            ${g.imagenes.map((src, i) => `
+                                <div class="swiper-slide">
+                                    <div class="img-download-wrap">
+                                        <img src="${src}" alt="foto ${i + 1}">
+                                        <a class="img-download-btn" href="${toCloudinaryDownloadUrl(src)}" target="_blank" rel="noopener" aria-label="Descargar imagen ${i + 1}">
+                                            ⬇
+                                        </a>
+                                    </div>
+                                </div>
+                            `).join('')}
                         </div>
                         <button type="button" class="swiper-button-next" aria-label="Siguiente">
-                            <span class="swiper-navigation-icon-text">›</span>
+                            <span class="swiper-navigation-icon-text" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+                            </span>
                         </button>
                         <button type="button" class="swiper-button-prev" aria-label="Anterior">
-                            <span class="swiper-navigation-icon-text">‹</span>
+                            <span class="swiper-navigation-icon-text" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -186,7 +301,7 @@ function renderGalerias() {
     `).join('');
 
     bindToggleEvents();
-    bindDownloadEvents();
+    bindBentoToSliderEvents();
 }
 
 function initSwiper(id) {
@@ -223,6 +338,8 @@ function initSwiper(id) {
         loop: false,
         slidesPerView: 1,
         spaceBetween: 16,
+        autoHeight: true,
+        preloadImages: true,
         navigation: {
             nextEl,
             prevEl,
@@ -237,6 +354,9 @@ function initSwiper(id) {
             init() {
                 this.update();
             },
+            imagesReady() {
+                this.updateAutoHeight(250);
+            },
         },
     });
 
@@ -246,6 +366,8 @@ function initSwiper(id) {
 
 function bindToggleEvents() {
     document.querySelectorAll('.btn-toggle').forEach(btn => {
+        if (btn.dataset.bound === '1') return;
+        btn.dataset.bound = '1';
         btn.addEventListener('click', () => {
             const viewType = btn.getAttribute('data-view');
             const article = btn.closest('article');
@@ -273,6 +395,14 @@ function bindToggleEvents() {
                     initSwiper(id);
                     const instance = swiperInstances.get(`swiper-${id}`);
                     if (instance) {
+                        const startIdxRaw = article?.getAttribute('data-start-idx');
+                        if (startIdxRaw != null) {
+                            const startIdx = Number(startIdxRaw);
+                            if (Number.isFinite(startIdx)) {
+                                instance.slideTo(startIdx, 0);
+                            }
+                            article?.removeAttribute('data-start-idx');
+                        }
                         instance.update();
                     }
                 }, 100);
@@ -281,20 +411,62 @@ function bindToggleEvents() {
     });
 }
 
-function bindDownloadEvents() {
-    document.querySelectorAll('.btn-download').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const article = btn.closest('article');
-            article?.querySelectorAll('.view-bento img').forEach((img, i) => {
-                const a = document.createElement('a');
-                a.href = img.src;
-                a.download = `foto-${i + 1}.jpg`;
-                a.target = '_blank';
-                a.click();
-            });
-        });
+function bindBentoToSliderEvents() {
+    const container = document.querySelector('#posts-container');
+    if (!container) return;
+    if (container.dataset.bentoBound === '1') return;
+    container.dataset.bentoBound = '1';
+
+    container.addEventListener('click', (e) => {
+        const target = e.target;
+        if (!(target instanceof HTMLElement)) return;
+
+        // Si el click fue en el botón de descargar, no cambiamos de vista.
+        if (target.closest('.img-download-btn')) return;
+
+        const wrap = target.closest('.view-bento .img-download-wrap');
+        if (!wrap) return;
+
+        const article = wrap.closest('article');
+        const idxRaw = wrap.getAttribute('data-idx');
+        const idx = idxRaw != null ? Number(idxRaw) : NaN;
+        if (!article || !Number.isFinite(idx)) return;
+
+        // Guardamos el índice para que el handler del toggle navegue a esa slide.
+        article.setAttribute('data-start-idx', String(idx));
+
+        // Cambiar a slider como si el usuario tocara el botón.
+        const sliderBtn = article.querySelector('.btn-toggle[data-view="slider"]');
+        sliderBtn?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
 }
 
-renderGalerias();
+async function loadGalerias() {
+  const el = document.getElementById('galeria-data');
+  if (el?.textContent) {
+    try {
+      galerias = JSON.parse(el.textContent);
+      return;
+    } catch (_) {
+      // fallback: API
+    }
+  }
+
+  const res = await fetch('/api/galerias');
+  if (!res.ok) throw new Error('No se pudo cargar /api/galerias');
+  galerias = await res.json();
+}
+
+function initComunidad() {
+  loadGalerias()
+    .then(() => renderGalerias())
+    .catch((e) => console.error('[Comunidad] Error cargando galerías', e));
+}
+
+document.addEventListener('astro:page-load', initComunidad);
+
+window.addEventListener('galeria:created', () => {
+  initComunidad();
+});
+
 </script>
