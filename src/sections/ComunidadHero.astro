@@ -254,9 +254,10 @@ function renderGalerias() {
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="flex bg-gray-100 p-1 rounded-xl">
-                        <button data-view="bento" class="btn-toggle px-4 py-2 rounded-lg text-xs font-bold transition bg-white shadow-sm text-orange-900 hover:bg-gray-200 cursor-pointer">Bento</button>
-                        <button data-view="slider" class="btn-toggle px-4 py-2 rounded-lg text-xs font-bold transition text-gray-500 hover:bg-gray-200 cursor-pointer">Slider</button>
+                        <button data-view="bento" class="btn-toggle px-4 py-2 rounded-lg text-xs font-bold transition bg-white shadow-sm text-orange-900 hover:bg-gray-200 cursor-pointer">Ver Todo</button>
+                        <button data-view="slider" class="btn-toggle px-4 py-2 rounded-lg text-xs font-bold transition text-gray-500 hover:bg-gray-200 cursor-pointer">Carrusel</button>
                     </div>
+                    <button type="button" data-id="${g.id}" class="btn-delete-galeria px-4 py-2 rounded-xl text-sm font-semibold text-red-700 border border-red-100 bg-red-50 hover:bg-red-100 transition">Eliminar</button>
                 </div>
             </div>
             <div class="gallery-content">
@@ -302,6 +303,39 @@ function renderGalerias() {
 
     bindToggleEvents();
     bindBentoToSliderEvents();
+    bindDeleteButtons();
+}
+
+function bindDeleteButtons() {
+    document.querySelectorAll('.btn-delete-galeria').forEach(btn => {
+        if (btn.dataset.bound === '1') return;
+        btn.dataset.bound = '1';
+        btn.addEventListener('click', async () => {
+            const id = btn.dataset.id;
+            if (!id) return;
+            const confirmed = window.confirm('¿Deseas eliminar esta galería y todas sus imágenes de Cloudinary?');
+            if (!confirmed) return;
+
+            btn.disabled = true;
+            btn.textContent = 'Eliminando...';
+
+            try {
+                const response = await fetch(`/api/galerias/${id}`, { method: 'DELETE' });
+                if (!response.ok) {
+                    const json = await response.json().catch(() => ({}));
+                    throw new Error(json?.error || 'Error al eliminar la galería.');
+                }
+
+                await loadGalerias(true);
+                renderGalerias();
+            } catch (error) {
+                console.error('[Galería] Error eliminado', error);
+                alert('No se pudo eliminar la galería. Revisa la consola para más detalles.');
+                btn.disabled = false;
+                btn.textContent = 'Eliminar';
+            }
+        });
+    });
 }
 
 function initSwiper(id) {
@@ -441,9 +475,9 @@ function bindBentoToSliderEvents() {
     });
 }
 
-async function loadGalerias() {
+async function loadGalerias(forceFetch = false) {
   const el = document.getElementById('galeria-data');
-  if (el?.textContent) {
+  if (!forceFetch && el?.textContent) {
     try {
       galerias = JSON.parse(el.textContent);
       return;

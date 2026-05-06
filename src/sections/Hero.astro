@@ -208,6 +208,20 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
     padding: 50px 20px;
 }
 
+.perspective-container::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    width: 280px;
+    height: 22px;
+    transform: translateX(-50%) rotateX(90deg) rotatey(13deg) rotateZ(-12deg);
+    background: rgba(0, 0, 0, 0.18);
+    filter: blur(14px);
+    border-radius: 50%;
+    z-index: 0;
+}
+
 /* El cuerpo del celular */
 .grabacion2 {
     anchor-name: --mi-ancla;
@@ -217,6 +231,7 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
     /* Mantenemos la rotación para ver el efecto 3D */
     transform: rotateX(-10deg) rotateY(-20deg); 
     transform-style: preserve-3d;
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.18);
 }
 
 /* Base común para todas las caras laterales */
