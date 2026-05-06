@@ -142,54 +142,54 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
 
         
         <!-- Sección Video + Mensaje -->
-     <section class="py-20 px-6 bg-orange-50/50">
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <section class="py-20 px-6 bg-orange-50/50">
+            <div class="max-w-5xl mx-auto flex flex-col md:grid md:grid-cols-2 gap-12 items-center">
 
-            <!-- Mensaje izquierda -->
-            <div class="space-y-6 md:ml-14  ml-1">
-                <span class=" text-xs font-bold text-orange-600 bg-orange-100 px-4 py-2 rounded-full uppercase tracking-widest">
-                    Síguenos en redes
-                </span>
-                <h2 class="text-3xl md:text-4xl font-bold text-orange-900 italic leading-tight mt-3">
-                    "Llevamos la Palabra a donde estés"
-                </h2>
-                <p class="text-lg text-gray-700 leading-relaxed">
-                    Cada semana publicamos mensajes cortos llenos de fe en nuestras redes sociales. Síguenos y recibe una palabra de aliento directo en tu feed.
-                </p>
-                <div class="flex flex-col gap-3">
-                    <a href="https://https://www.instagram.com/iglesiadejesucristovzla/" target="_blank" class="inline-flex items-center gap-3 text-pink-600 font-bold text-lg hover:text-pink-500 transition">
-                        <i class="fab fa-instagram text-2xl"></i>
-                        Síguenos en Instagram
-                    </a>
-                    <a href="https://wa.me/+584121126733" target="_blank" class="inline-flex items-center gap-3 text-green-600 font-bold text-lg hover:text-green-500 transition">
-                        <i class="fab fa-whatsapp text-2xl"></i>
-                        Contáctanos por WhatsApp
-                    </a>
-                    <a href="https://www.facebook.com/iglesiadejesucristovzla" target="_blank" class="inline-flex items-center gap-3 text-blue-600 font-bold text-lg hover:text-blue-500 transition">
-                        <i class="fab fa-facebook text-2xl"></i>
-                        Síguenos en Facebook
-                    </a>
+                <!-- Mensaje izquierda -->
+                <div class="space-y-6 w-full">
+                    <span class="text-xs font-bold text-orange-600 bg-orange-100 px-4 py-2 rounded-full uppercase tracking-widest">
+                        Síguenos en redes
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-orange-900 italic leading-tight mt-3">
+                        "Llevamos la Palabra a donde estés"
+                    </h2>
+                    <p class="text-lg text-gray-700 leading-relaxed max-w-prose">
+                        Cada semana publicamos mensajes cortos llenos de fe en nuestras redes sociales. Síguenos y recibe una palabra de aliento directo en tu feed.
+                    </p>
+                    <div class="flex flex-col gap-3">
+                        <a href="https://www.instagram.com/iglesiadejesucristovzla/" target="_blank" class="inline-flex items-center gap-3 text-pink-600 font-bold text-lg hover:text-pink-500 transition">
+                            <i class="fab fa-instagram text-2xl"></i>
+                            Síguenos en Instagram
+                        </a>
+                        <a href="https://wa.me/+584121126733" target="_blank" class="inline-flex items-center gap-3 text-green-600 font-bold text-lg hover:text-green-500 transition">
+                            <i class="fab fa-whatsapp text-2xl"></i>
+                            Contáctanos por WhatsApp
+                        </a>
+                        <a href="https://www.facebook.com/iglesiadejesucristovzla" target="_blank" class="inline-flex items-center gap-3 text-blue-600 font-bold text-lg hover:text-blue-500 transition">
+                            <i class="fab fa-facebook text-2xl"></i>
+                            Síguenos en Facebook
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Video YouTube Short derecha -->
+                <div class="perspective-container w-full">
+                    <div class="grabacion2 rounded-3xl shadow-2xl border-4 border-zinc-950">
+                        <div class="cara2 superior2"></div>
+                        <div class="cara2 inferior2"></div>
+                        <div class="cara2 derecha2"></div>
+                        <div class="camara2"><p>o</p></div>
+                        <iframe
+                            src="https://www.youtube.com/embed/XVkXyYWhycg"
+                            class="w-full aspect-9/16 rounded-2xl" 
+                            frameborder="0"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
             </div>
-                        <!-- Video YouTube Short derecha -->
-<div class="flex justify-center px-4">
-    <!-- Contenedor del video con ancho controlado y bordes redondeados -->
-    <div class="gabacion relative rounded-3xl overflow-hidden shadow-2xl border-4 border-zinc-950 w-full max-w-[320px]">
-        <div class="camara"><p>o</p></div>
-        <iframe
-            src="https://www.youtube.com/embed/XVkXyYWhycg"
-            title="Mensaje de la Iglesia"
-            class="w-full aspect-9/16" 
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-</div>
-
-
-        </div>
-    </section>
+        </section>
 
 
 
@@ -198,13 +198,113 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
 
 <style>
 
+
+/* Contenedor de perspectiva */
+.perspective-container {
+    perspective: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+/* El cuerpo del celular */
+.grabacion2 {
+    anchor-name: --mi-ancla;
+    z-index: 10;
+    position: relative;
+    width: 320px;
+    /* Mantenemos la rotación para ver el efecto 3D */
+    transform: rotateX(-10deg) rotateY(-20deg); 
+    transform-style: preserve-3d;
+}
+
+/* Base común para todas las caras laterales */
+.cara2 {
+    position: absolute;
+    background: #1a1a1a; /* Color oscuro para profundidad */
+    border: 1px solid #000;
+}
+
+/* Cara Superior: Se dobla desde el borde de arriba */
+.superior2 {
+    width: 100%;
+    height: 40px; /* Grosor del celular */
+    top: -2px;
+    left: 0;
+    transform-origin: top;
+    transform: rotateX(-70deg);
+    background: #272727;
+    border-radius: 1em 1em 0 0; /* Solo arriba para que encaje con el frente */
+}
+
+/* Cara Inferior: Se dobla desde el borde de abajo */
+.inferior2 {
+    width: 100%;
+    height: 40px; /* Grosor del celular */
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom;
+    transform: rotateX(90deg);
+    background: #121212;
+    border-radius: 0 0 1em 1em; /* Solo abajo */
+}
+
+/* Cara Derecha: Se dobla desde el borde derecho */
+.derecha2 {
+    width: 40px; /* Grosor del celular */
+    height: 99%;
+    top: 4px;
+    right: 0;
+    transform-origin: right;
+    transform: rotateY(-90deg);
+    background: #222;
+    border-radius: 2em 1em 3em 0; /* Solo en el lado externo derecho */
+}
+
+/* La cámara (Dynamic Anchor) */
+.camara2 {
+    width: 60px;
+    height: 20px;
+    background: #000;
+    position: absolute;
+    position-anchor: --mi-ancla;
+    position-area: top;
+    margin-top: 0px; /* Ajuste para que se vea sobre el borde */
+    border-radius: 0 0 15px 15px;
+    z-index: 30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+
+
+
+
  /* Camara  Celular */
     .grabacion{
-         anchor-name: --mi-ancla;
-             z-index: 10;
-
+       anchor-name: --mi-ancla;
+       z-index: 10;
+         transform: rotateX(360deg) rotateY(345deg);
+           transform-style: preserve-3d; 
     }
 
+
+    .cara {
+  position: absolute;
+  border: 2px solid #333;
+  opacity: 0.8;
+}
+
+.derecha  { width: 100px; height: 100%; background: #272727;     border-radius: 1em 1em ; left: 360px; transform: rotateY(75deg); }
+
+
+.superior { width: 100%; height: 100px; background: #2ecc71; top: -50px; transform: rotateX(75deg); }
+.inferior { width: 100%; height: 100px; background: #27ae60; bottom: -80px; transform: rotateX(-75deg); }
+
+/* .izquierda { width: 100px; height: 100%; background: #c0392b; left: -250px; transform: rotateY(-90deg); } */
 .camara {
     width: 42px;
     height: 18px;
@@ -305,3 +405,29 @@ content: "";
     </style>
    
 
+<script>
+/**
+ * 
+ * 
+     <div class="flex justify-center relative  px-4 perspective-[1150px]">
+            <!-- Contenedor del video con ancho controlado y bordes redondeados -->
+            <div class="grabacion rounded-3xl overflow-hidden shadow-2xl border-4 border-zinc-950 w-full max-w-[320px]">
+                <div class="camara"><p>o</p></div>
+                <iframe
+                    src="https://www.youtube.com/embed/XVkXyYWhycg"
+                    title="Mensaje de la Iglesia"
+                    class="w-full aspect-9/16" 
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+                <div class="cara superior"></div>
+            <div class="cara inferior"></div>
+                    <div class="cara derecha"></div>
+                        
+        </div>
+ * 
+ **/
+</script>   
