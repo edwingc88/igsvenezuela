@@ -38,8 +38,56 @@ const galerias = await getGalerias();
             </a>
         </div>
 
+        <!-- Skeleton Loader -->
+        <div id="skeleton-loader" class="space-y-16">
+            <article class="bg-white p-8 rounded-[40px] shadow-xl border border-orange-50 animate-pulse">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                    <div>
+                        <div class="h-4 bg-gray-200 rounded-full w-20 mb-2"></div>
+                        <div class="h-6 bg-gray-200 rounded w-64 mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-48"></div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="flex bg-gray-100 p-1 rounded-xl">
+                            <div class="px-4 py-2 rounded-lg bg-gray-200 w-16 h-8"></div>
+                            <div class="px-4 py-2 rounded-lg bg-gray-200 w-16 h-8"></div>
+                        </div>
+                        <div class="px-4 py-2 rounded-xl bg-gray-200 w-20 h-8"></div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-4 gap-3">
+                    <div class="aspect-square bg-gray-200 rounded-lg"></div>
+                    <div class="aspect-square bg-gray-200 rounded-lg"></div>
+                    <div class="aspect-square bg-gray-200 rounded-lg"></div>
+                    <div class="aspect-square bg-gray-200 rounded-lg"></div>
+                </div>
+            </article>
+            <article class="bg-white p-8 rounded-[40px] shadow-xl border border-orange-50 animate-pulse">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                    <div>
+                        <div class="h-4 bg-gray-200 rounded-full w-20 mb-2"></div>
+                        <div class="h-6 bg-gray-200 rounded w-64 mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-48"></div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="flex bg-gray-100 p-1 rounded-xl">
+                            <div class="px-4 py-2 rounded-lg bg-gray-200 w-16 h-8"></div>
+                            <div class="px-4 py-2 rounded-lg bg-gray-200 w-16 h-8"></div>
+                        </div>
+                        <div class="px-4 py-2 rounded-xl bg-gray-200 w-20 h-8"></div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-4 gap-3">
+                    <div class="aspect-square bg-gray-200 rounded-lg"></div>
+                    <div class="aspect-square bg-gray-200 rounded-lg"></div>
+                    <div class="aspect-square bg-gray-200 rounded-lg"></div>
+                    <div class="aspect-square bg-gray-200 rounded-lg"></div>
+                </div>
+            </article>
+        </div>
+
         <!-- Galería renderizada por JS -->
-        <div id="posts-container" class="space-y-16"></div>
+        <div id="posts-container" class="space-y-16" style="display: none;"></div>
 
         <!-- Paginación -->
         <div class="mt-20 flex justify-center items-center space-x-3">
@@ -301,6 +349,11 @@ function renderGalerias() {
         </article>
     `).join('');
 
+    // Ocultar skeleton y mostrar contenido real
+    const skeleton = document.querySelector('#skeleton-loader');
+    if (skeleton) skeleton.style.display = 'none';
+    container.style.display = 'block';
+
     bindToggleEvents();
     bindBentoToSliderEvents();
     bindDeleteButtons();
@@ -492,9 +545,23 @@ async function loadGalerias(forceFetch = false) {
 }
 
 function initComunidad() {
+  // Mostrar skeleton loader inicialmente
+  const skeleton = document.querySelector('#skeleton-loader');
+  const container = document.querySelector('#posts-container');
+  if (skeleton) skeleton.style.display = 'block';
+  if (container) container.style.display = 'none';
+
   loadGalerias()
     .then(() => renderGalerias())
-    .catch((e) => console.error('[Comunidad] Error cargando galerías', e));
+    .catch((e) => {
+      console.error('[Comunidad] Error cargando galerías', e);
+      // Ocultar skeleton en caso de error
+      if (skeleton) skeleton.style.display = 'none';
+      if (container) {
+        container.style.display = 'block';
+        container.innerHTML = '<p class="text-center text-gray-500">Error al cargar las galerías. Intenta recargar la página.</p>';
+      }
+    });
 }
 
 document.addEventListener('astro:page-load', initComunidad);
