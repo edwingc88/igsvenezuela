@@ -15,7 +15,12 @@
             </div>
             <div class="md:hidden flex items-center">
                 <button id="mobile-menu-button" class="text-orange-900 focus:outline-none hover:text-orange-800 hover:cursor-pointer">
-                    <i class="fas fa-bars text-2xl"></i>
+    <!--                 <i class="fas fa-bars text-2xl"></i> -->
+                           <div class="menu close">
+        <div class="linea-1"></div>
+        <div class="linea-2"></div>
+        <div class="linea-3"></div>
+      </div>
                 </button>
             </div>    
         </div>
@@ -26,7 +31,7 @@
     <a href="/nosotros" class="hover:text-orange-600">Quiénes Somos</a>
     <a href="/servicios" class="hover:text-orange-600">Servicios</a>
     <a href="/comunidad" class="hover:text-orange-600">Comunidad</a>
-    <a href="/contacto" class="text-orange-600 font-bold">Contacto</a>
+    <a href="/contacto" class="text-orange-600 font-bold">Contacto <i class="fas fa-address-book ml-2 text-yellow-950"></i></a>
 </div>
 
 </nav>
@@ -41,6 +46,101 @@
     });
 </script> -->
 
+<style>
+    .menu{
+  cursor: pointer;
+
+  & .linea-1{
+    position: relative;
+    background-color: #7e2a0c;
+    width: 26px;
+    height:3px;
+/*     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ */ 
+    border-radius: 2px;
+    margin-block: .4em;
+    pointer-events: none; 
+  }
+  & .linea-2{
+    position: relative;
+    background-color:  #7e2a0c;
+    width: 26px;
+    height: 3px;
+/*     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ */ 
+    border-radius: 2px;
+    transition:  transform .6s ;
+    transform: scale(1);
+    pointer-events: none; 
+  }
+  & .linea-3{
+    position: relative;
+    background-color:  #7e2a0c;
+    width: 26px;
+    height: 3px;
+/*     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ */ 
+    border-radius: 2px;
+    margin-block: .4em;
+    pointer-events: none; 
+  }
+}
+
+.down{
+  animation: miAnimacion1 .8s forwards !important;;
+}
+
+.down-reverse{
+  animation: miAnimacion1R .8s forwards !important;;
+}
+
+
+.up{
+  animation: miAnimacion2 .8s forwards !important;;
+}
+
+.up-reverse{
+  animation: miAnimacion2R .8s forwards !important;;
+}
+
+
+.middle{
+  transform: scale(0)!important;
+}
+
+.middle-reverse{
+  transition:  transform .6s .2s!important ;
+  transform: revert;
+}
+
+
+@keyframes miAnimacion1 {
+  0% { transform: translateY(0)  }
+  50% { transform: translateY(9px) ; }
+  100% { transform:  translateY(9px) rotate(45deg) ; }
+}
+
+@keyframes miAnimacion2 {
+  0% { transform: translateY(0) ; }
+  50% { transform: translateY(-9px) ; }
+  100% { transform: translateY(-9px)  rotate(135deg) ; }
+}
+
+
+@keyframes miAnimacion1R {
+  100% { transform: translateY(0)  }
+  50% { transform: translateY(9px) ; }
+  0% { transform:  translateY(9px) rotate(45deg) ; }
+}
+
+@keyframes miAnimacion2R {
+  100% { transform: translateY(0) ; }
+  50% { transform: translateY(-9px) ; }
+  0% { transform: translateY(-9px)  rotate(135deg) ; }
+}
+
+</style>
+
 <script>
   document.addEventListener('astro:page-load', () => {
     const btn = document.querySelector('#mobile-menu-button');
@@ -52,6 +152,41 @@
         menu.classList.toggle('flex');
       });
     }
+
+const $= (e)=> document.querySelector(e)
+
+/* document.querySelectorAll('.menu > div').forEach(function(child) {
+  child.addEventListener('click', function(event) {
+      console.log('Click en un hijo');
+  });
+}); */
+
+
+$('.menu').addEventListener('click', (e)=>{
+  console.log(e.target.classList)
+    if(e.target.classList.contains('close')){
+      e.target.classList.remove('close')
+      e.target.classList.add('open')
+      $('.linea-1').classList.remove('down-reverse')
+      $('.linea-2').classList.remove('middle-reverse')
+      $('.linea-3').classList.remove('up-reverse')
+    $('.linea-1').classList.add('down')
+    $('.linea-2').classList.add('middle')
+    $('.linea-3').classList.add('up')
+    }else{
+      e.target.classList.remove('open')
+      e.target.classList.add('close')
+      $('.linea-1').classList.remove('down')
+      $('.linea-2').classList.remove('middle')
+      $('.linea-3').classList.remove('up')
+      $('.linea-1').classList.add('down-reverse')
+      $('.linea-2').classList.add('middle-reverse')
+      $('.linea-3').classList.add('up-reverse')
+    }
+})
+
+
+
   });
 </script>
 
