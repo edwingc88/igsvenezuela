@@ -31,7 +31,7 @@
     <div>
         <label class="block text-sm font-bold text-orange-900 mb-2">Selecciona tus fotos (pueden ser varias)</label>
         <div id="drop-area" class="drop-zone relative rounded-2xl flex flex-col items-center justify-center cursor-pointer overflow-hidden bg-gray-50">
-            <input type="file" id="foto" class="hidden" accept="image/*" multiple>
+        <input type="file" id="foto" class="hidden" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
             
             <div id="modal-preview-grid" class="flex flex-wrap gap-2 p-4">
                 <!-- Aquí se cargarán las miniaturas -->
@@ -77,11 +77,61 @@ const previewGrid = document.querySelector('#modal-preview-grid') as HTMLElement
 const previewInfo = document.querySelector('#modal-preview-info') as HTMLElement | null;
 let selectedFiles: File[] = [];
 
+// Constantes de validación
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB por archivo
+const MAX_FILES = 20; // máximo 20 archivos
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+
+function validateFile(file: File): string | null {
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    return `Tipo de archivo no permitido: ${file.name}. Solo imágenes JPG, PNG, WebP o GIF.`;
+  }
+  if (file.size > MAX_FILE_SIZE) {
+    return `Archivo demasiado grande: ${file.name}. Máximo 5MB por archivo.`;
+  }
+  return null;
+}
+
+function getClientId() {
+  let id = localStorage.getItem('igs_client_id');
+  if (!id) {
+    id = crypto.randomUUID?.() ?? `igs-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    localStorage.setItem('igs_client_id', id);
+  }
+  return id;
+}
+
 dropArea?.addEventListener('click', () => fileInput?.click());
 
 fileInput?.addEventListener('change', () => {
-    selectedFiles = fileInput.files ? Array.from(fileInput.files) : [];
-    if (!previewGrid) return;
+  const files = fileInput.files;
+    if (!files) return;
+
+    // Validar cantidad de archivos
+    if (files.length > MAX_FILES) {
+        alert(`Máximo ${MAX_FILES} archivos permitidos.`);
+        fileInput.value = '';
+        return;
+    }
+
+    // Validar cada archivo
+    const errors: string[] = [];
+    for (let i = 0; i < files.length; i++) {
+        const error = validateFile(files[i]);
+        if (error) errors.push(error);
+    }
+
+    if (errors.length > 0) {
+        alert('Errores en archivos:\n' + errors.join('\n'));
+        fileInput.value = '';
+        return;
+    }
+
+    selectedFiles = Array.from(files);
+
+
+    /*     selectedFiles = fileInput.files ? Array.from(fileInput.files) : [];
+ */    if (!previewGrid) return;
     previewGrid.innerHTML = '';
     if (selectedFiles.length > 0) {
         previewInfo?.classList.add('hidden');
@@ -114,7 +164,13 @@ document.querySelector('#churchForm')?.addEventListener('submit', async (e) => {
     fd.append('autor', autor);
     fd.append('titulo', titulo);
     fd.append('categoria', categoria);
+    fd.append('client_id', getClientId());
     selectedFiles.forEach((f) => fd.append('files', f));
+
+    const submitButton = document.querySelector('#churchForm button[type="submit"]');
+    const originalButtonText = submitButton?.textContent;
+    submitButton?.setAttribute('disabled', 'true');
+    if (submitButton) submitButton.textContent = 'Subiendo...';
 
     try {
         const res = await fetch('/api/upload', { method: 'POST', body: fd });
@@ -130,6 +186,11 @@ document.querySelector('#churchForm')?.addEventListener('submit', async (e) => {
     } catch (err) {
         console.error('[Upload] Falló', err);
         alert('Error subiendo galería.');
+    } finally {
+        if (submitButton) {
+            submitButton.removeAttribute('disabled');
+            submitButton.textContent = originalButtonText ?? 'Publicar Galería en el Muro';
+        }
     }
 });
 

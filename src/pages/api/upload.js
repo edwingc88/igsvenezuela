@@ -42,11 +42,30 @@ function uploadBufferToCloudinary({ buffer, filename, folder, tags, context }) {
 export async function POST({ request }) {
   try {
     const form = await request.formData();
+    const clientId = String(form.get('client_id') ?? 'unknown').trim();
 
     const autor = String(form.get('autor') ?? '').trim();
     const titulo = String(form.get('titulo') ?? '').trim();
     const categoria = String(form.get('categoria') ?? '').trim();
     const files = form.getAll('files').filter(Boolean);
+
+    const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+    const { data: recentUploads, error: limitError } = await supabaseServer
+      .from('upload_logs')
+      .select('id')
+      .eq('client_id', clientId)
+      .gte('created_at', tenMinutesAgo);
+
+    if (limitError) {
+      console.error('[RateLimit] Error checking uploads', limitError);
+    } else if (recentUploads?.length >= 5) {
+      return new Response(JSON.stringify({
+        error: 'Demasiadas subidas recientes. Espera 10 minutos antes de intentar otra vez.',
+      }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
     if (!autor || !titulo || !categoria) {
       return new Response(JSON.stringify({ error: 'Faltan campos requeridos.' }), {
@@ -61,6 +80,16 @@ export async function POST({ request }) {
         headers: { 'Content-Type': 'application/json' },
       });
     }
+
+    await supabaseServer
+      .from('upload_logs')
+      .insert({
+        client_id: clientId,
+        autor,
+        titulo,
+        categoria,
+        file_count: files.length,
+      });
 
     // 1) Crear registro en Supabase para obtener ID
     const { data: created, error: insertError } = await supabaseServer
