@@ -344,7 +344,7 @@ content: "";
     background-blend-mode: soft-light; /* Prueba también con 'multiply' o 'luminosity' */
     
     /* 3. Ajuste fino de presencia */
-    opacity: 0.09;
+    opacity: 0.1;
 }
 
 @media (max-width: 600px) {
@@ -365,8 +365,47 @@ content: "";
     background-blend-mode: soft-light; /* Prueba también con 'multiply' o 'luminosity' */
     
     /* 3. Ajuste fino de presencia */
-    opacity: 0.09;
+    opacity: 0.1;
 }
+}
+
+/* Luz superior / rayos sutiles para efecto espiritual */
+.bg-church-gradient::after {
+        content: "";
+        position: absolute;
+        top: -18%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 140%;
+        height: 70%;
+        pointer-events: none;
+        z-index: 5;
+        /* Capa de halo + rayos: radial + conic for subtle beams */
+        background-image:
+            radial-gradient(ellipse at top center, rgba(255, 240, 180, 0.22), rgba(255,240,200,0.08) 25%, transparent 45%),
+            repeating-conic-gradient(from 270deg at 50% 0%, rgba(255,245,200,0.06) 0deg 2deg, rgba(255,245,200,0.00) 2deg 6deg);
+        background-blend-mode: screen;
+        filter: blur(10px);
+        opacity: 0.9;
+        mix-blend-mode: screen;
+        transform-origin: top center;
+        animation: subtle-sun-move 6s ease-in-out infinite alternate;
+}
+
+@keyframes subtle-sun-move {
+        from { transform: translateX(-50%) translateY(-2px) scale(1); opacity: 0.88; }
+        to   { transform: translateX(-48%) translateY(2px) scale(1.02); opacity: 0.98; }
+}
+
+@media (max-width: 600px) {
+    .bg-church-gradient::after {
+        top: -10%;
+        width: 200%;
+        height: 50%;
+        background-image: radial-gradient(ellipse at top center, rgba(255, 240, 180, 0.18), rgba(255,240,200,0.06) 30%, transparent 55%);
+        filter: blur(12px);
+        animation-duration: 8s;
+    }
 }
 
 
