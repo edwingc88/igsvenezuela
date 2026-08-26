@@ -321,8 +321,8 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
 .bg-church-gradient {
     position: relative;
     width: 100%;
-    background: transparent;
-    overflow: hidden;
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(166, 93, 38, 0.45) 0%, rgba(99, 51, 20, 0.55) 100%);
 }
 
 .bg-church-gradient h1 {
@@ -337,6 +337,7 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
 content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
+    height: 100%;
     
     /* 1. Ponemos la imagen Y el mismo degradado (o un color base) */
     background-image: url('casa-horizontal.jpg'), 
@@ -347,7 +348,7 @@ content: "";
     background-position: top center, center;
 
     /* 2. LA MAGIA: Esto mezcla la imagen con el degradado del paso 1 */
-    background-blend-mode: soft-light; /* Prueba también con 'multiply' o 'luminosity' */
+    background-blend-mode: soft-light;
     
     /* 3. Ajuste fino de presencia */
     opacity: 0.55;
@@ -383,7 +384,7 @@ content: "";
         left: 50%;
         transform: translateX(-50%);
         width: 140%;
-        height: 70%;
+        height: 100%;
         pointer-events: none;
         z-index: 5;
         /* Capa de halo + rayos: radial + conic for subtle beams */
