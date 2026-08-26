@@ -8,7 +8,7 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
         <header class="bg-logo relative overflow-hidden bg-church-gradient text-white py-32 md:py-40 px-6 text-center">
             <div class="max-w-4xl mx-auto relative z-10">
                 <h1 class="text-4xl md:text-6xl font-bold mb-6 italic">Te esperamos con los brazos abiertos</h1>
-                <p class="text-lg md:text-xl opacity-90 mb-10 leading-relaxed text-pretty">
+                <p class="text-xl md:text-2xl mb-10 leading-relaxed text-pretty">
                  "Bienvenido a nuestra iglesia, estamos listos para acompañarte. Si buscas donde congregarte o apoyo a través de la oración, en nuestra casa siempre tendrás un espacio. Visítanos y permítenos conocerte."
                 </p>
                 <div class="flex flex-wrap justify-center gap-4">
@@ -319,22 +319,24 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
       /*       background: linear-gradient(135deg, #a65d26 0%, #633314 100%), url('logo--blanco.png'); */
 
 .bg-church-gradient {
-    position: relative; /* Necesario para contener la capa del logo */
+    position: relative;
     width: 100%;
-    background: linear-gradient(135deg, rgba(166, 93, 38, 0.45) 0%, rgba(99, 51, 20, 0.55) 100%);
+    background: transparent;
     overflow: hidden;
 }
 
-.bg-church-gradient h1,
-.bg-church-gradient p,
-.bg-church-gradient a {
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);
+.bg-church-gradient h1 {
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6), 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.bg-church-gradient p {
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55), 0 1px 5px rgba(0, 0, 0, 0.35);
 }
 
 .bg-church-gradient::before {
 content: "";
     position: absolute;
-    top: -15%; left: 0; right: -5%; bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     
     /* 1. Ponemos la imagen Y el mismo degradado (o un color base) */
     background-image: url('casa-horizontal.jpg'), 
