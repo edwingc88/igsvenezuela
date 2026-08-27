@@ -7,9 +7,9 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
         <!-- Hero Section -->
         <header class="bg-logo relative overflow-hidden bg-church-gradient text-white py-32 md:py-40 px-6 text-center">
             <div class="max-w-4xl mx-auto relative z-10">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 italic">Te esperamos con los brazos abiertos</h1>
-                <p class="text-xl md:text-2xl mb-10 leading-relaxed text-pretty">
-                 "Bienvenido a nuestra iglesia, estamos listos para acompañarte. Si buscas donde congregarte o apoyo a través de la oración, en nuestra casa siempre tendrás un espacio. Visítanos y permítenos conocerte."
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 italic">Dios tiene un propósito para ti</h1>
+                <p class="text-2xl md:text-2xl mb-10 leading-relaxed text-pretty">
+                 "Bienvenido a nuestra iglesia, estamos listos para acompañarte. Si buscas donde congregarte o apoyo a través de la oración, en esta casa siempre tendrás un espacio."
                 </p>
                 <div class="flex flex-wrap justify-center gap-4">
                 <a 
@@ -330,7 +330,14 @@ import FormularioGaleria from '../components/FormularioGaleria.astro';
 }
 
 .bg-church-gradient p {
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55), 0 1px 5px rgba(0, 0, 0, 0.35);
+    max-width: 42rem;
+    margin-inline: auto;
+    color: #fff;
+    font-weight: 500;
+    text-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.9),
+        0 2px 5px rgba(0, 0, 0, 0.8),
+        0 6px 18px rgba(0, 0, 0, 0.55);
 }
 
 .bg-church-gradient::before {
@@ -343,18 +350,23 @@ content: "";
     background-image: url('casa-horizontal.jpg'), 
                       linear-gradient(135deg, rgba(166, 93, 38, 0.45) 0%, rgba(99, 51, 20, 0.55) 100%);
     
-    background-size: 100%, cover;
+    background-size: cover, cover;
     background-repeat: no-repeat;
-    background-position: top center, center;
+    background-position: center, center;
 
     /* 2. LA MAGIA: Esto mezcla la imagen con el degradado del paso 1 */
     background-blend-mode: soft-light;
     
     /* 3. Ajuste fino de presencia */
-    opacity: 0.55;
+    opacity: 0.70;
 }
 
 @media (max-width: 600px) {
+.bg-church-gradient p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
 .bg-church-gradient::before {
 content: "";
     position: absolute;
@@ -364,7 +376,7 @@ content: "";
     background-image: url('casa.jpg'), 
                       linear-gradient(135deg, rgba(166, 93, 38, 0.45) 0%, rgba(99, 51, 20, 0.55) 100%);
     
-    background-size: 100%, cover;
+    background-size: cover, cover;
     background-repeat: no-repeat;
     background-position: center center, center;
 
@@ -372,7 +384,7 @@ content: "";
     background-blend-mode: soft-light;
     
     /* 3. Ajuste fino de presencia */
-    opacity: 0.55;
+    opacity: 0.70;
 }
 }
 

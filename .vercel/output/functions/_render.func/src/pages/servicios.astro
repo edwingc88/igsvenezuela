@@ -1,0 +1,193 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+
+const title = 'Iglesia de Jesuscristo Venezuela'
+const description =
+  'Iglesia Cristiana en Venezuela: Un Hogar de Fe para tu Familia'
+const canonical = 'https://igsvenezuela.vercel.app/servicios'
+---
+
+<Layout title={title} description={description} canonical={canonical}>  <!-- PÁGINA: SERVICIOS -->
+<main id="page-servicios" class="page-content py-4  px-6">
+                <!-- Banner de Evento Especial -->
+            <div class="special-event-banner gap-7 md:gap-8 p-8 ">
+                <div class="max-w-full md:max-w-1/2">
+                    <span class="bg-orange-600 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mt-2 md:mt-0 mb-4 inline-block">Evento Especial</span>
+                    <h3 class="text-4xl md:text-5xl font-bold italic mb-6">Manos que Bendicen</h3>
+                    <p class="text-xl text-orange-50/90 mb-8">Inciativa Juvenil que nace con el propósito de llevar alegría, esperanza y apoyo real a los niños que más lo necesitan.</p>
+                    <div class="flex flex-wrap  gap-6 text-sm font-bold uppercase tracking-tighter">
+                        <div class="bg-white/10 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/20">
+                            <i class="far fa-calendar-alt mr-2"></i> Miercoles 6 de Mayo
+                        </div>
+
+                    </div>
+                </div>
+                <div class="max-w-full md:max-w-1/2">
+                 <img class="w-80 rounded-2xl border-2 border-orange-50" src="manos.jpeg" alt="manos que bendicen" />
+                </div>
+            </div>
+
+                  <!-- Servicios -->
+        <div class="max-w-7xl mx-auto py-14">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl font-bold text-orange-900 italic">Nuestros Servicios</h2>
+                <p class="text-gray-500 mt-2 text-lg">Te invitamos a ser parte de lo que Dios está haciendo.</p>
+            </div>
+
+            <!-- Grid de Servicios con Imágenes de Fondo -->
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Martes -->
+                <div class="service-card-img">
+                    <img src="danzarina.jpg" alt="Alabanza">
+                    <div class="service-overlay">
+                        <div class="flex items-center gap-2 mb-2 text-orange-400">
+                            <i class="fas fa-pray"></i>
+                            <span class="text-xs font-bold uppercase tracking-widest">Oración</span>
+                        </div>
+                        <h3 class="text-3xl font-bold italic mb-2">Intercesión y Alabanza</h3>
+                        <p class="text-orange-300 font-bold mb-4">Martes — 6:30 PM</p>
+                        <p class="text-gray-200 text-sm leading-relaxed">
+                            Un espacio sagrado para levantar nuestras manos y corazones en unidad ante el Padre.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Jueves -->
+                <div class="service-card-img">
+                    <img src="ministracion.jpg" alt="Estudio">
+                    <div class="service-overlay">
+                        <div class="flex items-center gap-2 mb-2 text-orange-400">
+                            <i class="fas fa-fire"></i>
+                            <span class="text-xs font-bold uppercase tracking-widest">Manifestación</span>
+                        </div>
+                        <h3 class="text-3xl font-bold italic mb-2">Fe y Poder</h3>
+                        <p class="text-orange-300 font-bold mb-4">Jueves — 6:30 PM</p>
+                        <p class="text-gray-200 text-sm leading-relaxed">
+                            Ven a recibir una palabra de autoridad que activará tu fe para ver lo imposible.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Domingo -->
+                <div class="service-card-img">
+                    <img src="gozo.jpg" alt="Familia en Iglesia">
+                    <div class="service-overlay">
+                        <div class="flex items-center gap-2 mb-2 text-orange-400">
+                            <i class="fas fa-sun"></i>
+                            <span class="text-xs font-bold uppercase tracking-widest">Celebración</span>
+                        </div>
+                        <h3 class="text-3xl font-bold italic mb-2">Domingo de Celebración</h3>
+                        <p class="text-orange-300 font-bold mb-4">Domingo — 9:00 AM</p>
+                        <p class="text-gray-200 text-sm leading-relaxed">
+                            Toda la familia reunida para celebrar la victoria de Cristo en un ambiente de gozo y amor.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+ <!-- Cita y Te Esperamos (Diseño Lateral Restaurado) -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center mb-2 mt-8 md:mt-10   h-full md:h-100 position-relative">
+                <div class="biblical-badge-card p-9 h-full justify-center ">
+                    <i class="fas fa-quote-left text-5xl text-orange-300/20 mb-4 block"></i>
+                    <p class="text-2xl md:text-3xl font-serif italic leading-relaxed">
+                        "Hubiera yo desmayado, si no creyese que veré la bondad de Jehová en la tierra de los vivientes."
+                    </p>
+                    <div class="mt-8 flex items-center justify-end">
+                        <span class="text-orange-200 font-bold tracking-widest text-sm uppercase">Salmos 27:13</span>
+                    </div>
+                </div>
+                <div class="bg-white p-10 rounded-[50px] shadow-2xl h-full justify-center content-center">
+                    <h5 class="text-3xl font-bold text-orange-900 mb-3 italic">¡Te esperamos con amor!</h5>
+                    <p class="text-gray-600 text-md leading-relaxed mb-5">
+                        Nuestra puerta y nuestro corazón están abiertos para ti. Creemos que cada persona es un tesoro para Dios. Ven a compartir una palabra de vida y una comunidad que te apoya.
+                    </p>
+                    <a href="https://maps.app.goo.gl/HvQaorUnvP3GZ8sc6" target="_blank" rel="noopener noreferrer" class="btn-church w-60 md:w-70 md:px-8 px-5 py-4 rounded-2xl font-bold flex items-center md:gap-3 gap-1 text-md  md:text-lg cursor-pointer">
+                        <i class="fas fa-map-marker-alt"></i> Sabes cómo llegar ?
+                    </a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+    <style>
+           /* Misión y Visión */
+        .card-mission {
+            background: white;
+            border: 1px solid #f1f1f1;
+            color: #3d2b1f;
+        }
+        
+        .card-vision {
+            background: #8c4b1d;
+            color: #fdfaf6;
+        }
+
+        /* Estilos de Servicios Corregidos */
+        .service-card-img {
+            position: relative;
+            height: 500px;
+            border-radius: 40px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+         /*    cursor: pointer; */
+            display: flex;
+            align-items: flex-end;
+            color: white;
+        }
+
+        .service-card-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.4);
+        }
+
+        .service-card-img img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card-img:hover img {
+            transform: scale(1.1);
+        }
+
+        .service-overlay {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 55%, transparent 100%);
+        }
+
+        .special-event-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('mano-izquierda.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 50px;
+            min-height: 450px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.3);
+        }
+
+
+        
+        .biblical-badge-card {
+            background: linear-gradient(135deg, #8c4b1d 0%, #4a2710 100%);
+            color: white;
+            border-radius: 35px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(74, 39, 16, 0.2);
+        }
+    </style>
+</Layout>
